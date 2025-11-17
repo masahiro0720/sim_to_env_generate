@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>crane_plus</ModuleName>
+    <Description>CRANE+ V2ロボット用のROS 2パッケージスイート。制御、記述、シミュレーション、およびMoveIt!設定ファイルが含まれています。</Description>
+    <Manufacturer>
+      <Name>RT Corporation</Name>
+      <Authors>Shota Aoki, Atsushi Kuwagata, Yusuke Kato</Authors>
+      <Maintainers>RT Corporation</Maintainers>
+      <CopyrightOwner>RT Corporation</CopyrightOwner>
+    </Manufacturer>
+    <Examples>
+      <Item>Simulation: ros2 launch crane_plus_examples demo.launch.py</Item>
+      <Item>Real Robot: ros2 launch crane_plus_examples demo.launch.py port_name:=/dev/ttyUSB0</Item>
+      <Item>Sample Script: ros2 launch crane_plus_examples example.launch.py example:='gripper_control' (performs gripper control)</Item>
+    </Examples>
+  </GenInfo>
+
+  <idnType type="Com">
+    <moduleID>
+      <mID>87a7d4a671d24e44b81b8f3b20e06e30XXXXXX03000000000000001001000000</mID>
+      <iID>00</iID>
+    </moduleID>
+    <informationModelVersion>1.0</informationModelVersion>
+    <swAspects>
+      <moduleID>
+        <mID>... (crane_plus_controlのID) ...</mID>
+        <iID>00</iID>
+      </moduleID>
+      <moduleID>
+        <mID>... (crane_plus_descriptionのID) ...</mID>
+        <iID>00</iID>
+      </moduleID>
+      <moduleID>
+        <mID>... (crane_plus_examplesのID) ...</mID>
+        <iID>00</iID>
+      </moduleID>
+      <moduleID>
+        <mID>... (crane_plus_gazeboのID) ...</mID>
+        <iID>00</iID>
+      </moduleID>
+      <moduleID>
+        <mID>... (crane_plus_moveit_configのID) ...</mID>
+        <iID>00</iID>
+      </moduleID>
+    </swAspects>
+  </idnType>
+
+  <Properties>
+    <osType type="Linux" bit="64" version="Ubuntu 24.04" />
+    <compiler>
+      <osName>Ubuntu</osName>
+      <verRangeOS min="24.04" max="24.04" />
+      <compilerName>GCC</compilerName>
+      <verRangeCompiler min="9.0" max="Higher" />
+      <bitnCPUarch>64, x86_64</bitnCPUarch>
+    </compiler>
+    <exeType>
+      <Item>
+        <opType>PERIODIC</opType>
+        <hardRT>false</hardRT>
+        <timeConstraint>10000</timeConstraint>
+        <priority>0</priority>
+        <instanceType>MultitonStatic</instanceType>
+      </Item>
+      <Item>
+        <opType>EVENTDRIVEN</opType>
+        <hardRT>false</hardRT>
+        <timeConstraint>0</timeConstraint>
+        <priority>0</priority>
+        <instanceType>MultitonComm</instanceType>
+      </Item>
+    </exeType>
+    <Libraries>
+      <Item name="ament_cmake" />
+      <Item name="controller_manager" />
+      <Item name="moveit_configs_utils" />
+      <Item name="ros_gz_bridge" />
+      <Item name="ros_gz_sim" />
+      <Item name="usb_cam" />
+      <Item name="dynamixel_sdk" />
+      <Item name="hardware_interface" />
+      <Item name="moveit_core" />
+      <Item name="moveit_ros_planning_interface" />
+      <Item name="tf2" />
+      <Item name="tf2_ros" />
+      <Item name="opencv2" />
+      <Item name="cv_bridge" />
+      <Item name="image_geometry" />
+      <Item name="rclcpp" />
+    </Libraries>
+    <organization>
+      <owner>
+        <mID>87a7d4a671d24e44b81b8f3b20e06e30XXXXXX03000000000000001001000000</mID>
+        <iID>00</iID>
+      </owner>
+      <dependency>OWNER</dependency>
+      <member>
+        <member>
+          <mID>... (crane_plus_controlのID) ...</mID>
+          <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+      </member>
+      <member>
+        <member>
+          <mID>... (crane_plus_descriptionのID) ...</mID>
+          <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+      </member>
+      <member>
+        <member>
+          <mID>... (crane_plus_examplesのID) ...</mID>
+          <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+      </member>
+      <member>
+        <member>
+          <mID>... (crane_plus_gazeboのID) ...</mID>
+          <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+      </member>
+      <member>
+        <member>
+          <mID>... (crane_plus_moveit_configのID) ...</mID>
+          <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+      </member>
+    </organization>
+  </Properties>
+
+  <IOVariables>
+    <Inputs>
+      <Input name="image_raw" type="class" complexName="sensor_msgs/Image" description="カメラからの未処理画像データ" />
+      <Input name="camera_info" type="class" complexName="sensor_msgs/CameraInfo" description="カメラのキャリブレーション情報" />
+      <Input name="tf" type="class" complexName="tf2_msgs/TFMessage" description="座標変換データ" />
+    </Inputs>
+
+    <Outputs>
+      <Output name="tf" type="class" complexName="tf2_msgs/TFMessage" description="検出された対象物の座標変換データ" />
+      <Output name="image_thresholded" type="class" complexName="sensor_msgs/Image" description="色の閾値処理が施された画像データ" />
+      <Output name="joint_states" type="class" complexName="sensor_msgs/JointState" description="各関節の現在の状態（位置、速度、トルク、温度、電圧など）" />
+    </Outputs>
+
+    <InOuts>
+      <InOut name="GoalPose" type="class" complexName="geometry_msgs/Pose" description="アームの目標ポーズ（位置と姿勢）" />
+      <InOut name="JointState" type="class" complexName="sensor_msgs/JointState" description="アームの目標関節値" />
+      <InOut name="FollowJointTrajectory" type="class" complexName="trajectory_msgs/JointTrajectory" description="アームの軌道実行アクション" />
+      <InOut name="SetJointState" type="class" complexName="sensor_msgs/JointState" description="コントローラへの関節値コマンド" />
+    </InOuts>
+  </IOVariables>
+
+  <Status>
+    <executionStatus>IDLE</executionStatus>
+    <errorType>0</errorType>
+  </Status>
+
+  <Services>
+    <NoOfBasicService>2</NoOfBasicService>
+    <NoOfOptionalService>0</NoOfOptionalService>
+
+    <ServiceXML>
+      <ID>controller_spawner_service</ID>
+      <pvType>Virtual</pvType>
+      <moType>MANDATORY</moType>
+      <methodList>
+        <Method>
+          <methodName>spawner</methodName>
+          <argType>
+            <ArgSpec type="string" valueName="controller_name" inout="IN" />
+          </argType>
+          <retType>bool</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+      </methodList>
+    </ServiceXML>
+
+    <ServiceXML>
+      <ID>move_group_interface</ID>
+      <pvType>Virtual</pvType>
+      <moType>MANDATORY</moType>
+      <methodList>
+        <Method>
+          <methodName>set_pose_target</methodName>
+          <argType>
+            <ArgSpec type="geometry_msgs/Pose" valueName="target_pose" inout="IN" />
+          </argType>
+          <retType>bool</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>REQUIRED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>move</methodName>
+          <argType />
+          <retType>bool</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>REQUIRED</reqProvType>
+        </Method>
+      </methodList>
+    </ServiceXML>
+  </Services>
+
+  <Infra>
+    <middleware>
+      <InfraType>
+        <name>ROS 2</name>
+        <version min="foxy" max="jazzy" />
+      </InfraType>
+    </middleware>
+    <comms>
+      <Communication>
+        <mostTopProtocol>
+          <InfraType>
+            <name>Dynamixel Protocol</name>
+            <version min="1.0" max="1.0" />
+          </InfraType>
+        </mostTopProtocol>
+        <underlyingProtocol>
+          <DataBus>
+            <connectionType>USB-serial</connectionType>
+            <typePhyMac>RS-485</typePhyMac>
+            <typeNetTrans>TBD</typeNetTrans>
+            <speed value="1000000" unit="bps" />
+            <additionalInfo>
+              <nv name="port_name" value="/dev/ttyUSB0" />
+            </additionalInfo>
+          </DataBus>
+        </underlyingProtocol>
+      </Communication>
+    </comms>
+    <power>
+      <ratedPower>TBD</ratedPower>
+      <maxPower>TBD</maxPower>
+    </power>
+  </Infra>
+
+  <SafeSecure>
+    <Safety>
+      <overallValidSafetyLevelType>NONE</overallValidSafetyLevelType>
+      <inSafetyLevel>
+        <safetyFunctionType>PSTOP</safetyFunctionType>
+        <validSafetyLevelType>PL</validSafetyLevelType>
+        <eachSafetyLevelPL>n</eachSafetyLevelPL>
+      </inSafetyLevel>
+      <inSafetyLevel>
+        <safetyFunctionType>LIMWS</safetyFunctionType>
+        <validSafetyLevelType>PL</validSafetyLevelType>
+        <eachSafetyLevelPL>n</eachSafetyLevelPL>
+      </inSafetyLevel>
+    </Safety>
+    <Security>
+      <overallCybSecurityLevel>0</overallCybSecurityLevel>
+      <inCybSecurityLevel type="INPUT_VALD" value="0" />
+    </Security>
+    <overallPhySecurityLevel>0</overallPhySecurityLevel>
+    <additionalInfo>
+      <nv>
+        <name>Disclaimer</name>
+        <value>The user is responsible for appropriate safety measures.</value>
+      </nv>
+    </additionalInfo>
+  </SafeSecure>
+
+  <Modelling>
+    <simulationModel>
+      <simulator>Gazebo</simulator>
+      <mdf type="URDF">
+        <Item>crane_plus_description/urdf/crane_plus.urdf.xacro</Item>
+        <Item>crane_plus_description/urdf/crane_plus.gazebo.xacro</Item>
+        <Item>crane_plus_description/urdf/crane_plus.gazebo_ros2_control.xacro</Item>
+        <Item>crane_plus_description/urdf/crane_plus.ros2_control.xacro</Item>
+      </mdf>
+      <mdf type="SDF">
+        <Item>crane_plus_gazebo/worlds/table.sdf</Item>
+        <Item>crane_plus_gazebo/worlds/table_with_aruco_cube.sdf</Item>
+        <Item>crane_plus_gazebo/worlds/table_with_red_cube.sdf</Item>
+      </mdf>
+      <mdf type="STL">
+        <Item>crane_plus_description/meshes/collision/body.stl</Item>
+        <Item>crane_plus_description/meshes/collision/hand.stl</Item>
+        <Item>crane_plus_description/meshes/collision/link1.stl</Item>
+        <Item>crane_plus_description/meshes/collision/link2.stl</Item>
+        <Item>crane_plus_description/meshes/collision/link3.stl</Item>
+        <Item>crane_plus_description/meshes/collision/link4.stl</Item>
+        <Item>crane_plus_description/meshes/visual/body.stl</Item>
+        <Item>crane_plus_description/meshes/visual/hand.stl</Item>
+        <Item>crane_plus_description/meshes/visual/link1.stl</Item>
+        <Item>crane_plus_description/meshes/visual/link2.stl</Item>
+        <Item>crane_plus_description/meshes/visual/link3.stl</Item>
+        <Item>crane_plus_description/meshes/visual/link4.stl</Item>
+      </mdf>
+      <dynamicSW>
+        <Item>
+          <shellCmd>gz sim -r world_name</shellCmd>
+        </Item>
+        <Item>
+          <shellCmd>ros2 launch crane_plus_examples demo.launch.py use_gazebo:=true</shellCmd>
+        </Item>
+      </dynamicSW>
+    </simulationModel>
+  </Modelling>
+
+  <ExecutableForm>
+    <exeForm>
+      <exeFileURL>devel/lib/crane_plus_control/crane_plus_hardware</exeFileURL>
+      <shellCmd>ros2 launch crane_plus_control crane_plus_control.launch.py port_name:=/dev/ttyUSB0</shellCmd>
+      <additionalInfo>
+        <nv>
+          <name>pre_execution_command</name>
+          <value>sudo chmod 666 /dev/ttyUSB0</value>
+        </nv>
+      </additionalInfo>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>devel/lib/crane_plus_examples/pick_and_place</exeFileURL>
+      <shellCmd>ros2 launch crane_plus_examples example.launch.py example:='pick_and_place'</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>devel/lib/crane_plus_control/crane_plus_hardware</exeFileURL>
+      <shellCmd>ros2 launch crane_plus_examples demo.launch.py use_gazebo:=true</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>~/Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>git</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>build-essential</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-colcon-common-extensions</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-gazebo-ros2-control</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-ros-gz-sim</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-ros2-controllers</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-joint-state-publisher</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-xacro</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-rviz2</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-moveit</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-control-msgs</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-vision-opencv</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>libopencv-dev</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-usb-cam</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-name.1</Name>
+          <Value>https://github.com/rt-net/crane_plus.git</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-branch.1</Name>
+          <Value>required</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-name.2</Name>
+          <Value>https://github.com/ROBOTIS-GIT/DynamixelSDK.git</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-branch.2</Name>
+          <Value>main</Value>
+        </nv>
+      </additionalInfo>
+    </exeForm>
+  </ExecutableForm>
+</Module>

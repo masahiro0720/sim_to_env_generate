@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>CraneplusRTC</ModuleName>
+    <Description>CraneplusRTC</Description>
+    <Manufacturer>
+      <Name>rsdlab</Name>
+      <Authors>rsdlab</Authors>
+      <Maintainers>unknown</Maintainers>
+      <CopyrightOwner>National Institute of Advanced Industrial Science and Technology</CopyrightOwner>
+    </Manufacturer>
+    <Examples>このモジュールは、OpenRTM-aistをベースとしたロボットアーム「CRANE+ V2」の制御用コンポーネントです。JARA-ARM共通インターフェースを通じて、ロボットの動作を制御します。</Examples>
+  </GenInfo>
+
+  <idnType type="Bas">
+    <moduleID>
+      <mID>e6b189a06c9c486093c6e9185a060d4dc3c3c30100000000000000100011000101</mID>
+      <iID>00</iID>
+    </moduleID>
+    <informationModelVersion>1.0</informationModelVersion>
+  </idnType>
+
+  <Properties>
+    <osType type="Linux" bit="64" version="Ubuntu 16.04" />
+    <compiler>
+      <osName>Ubuntu</osName>
+      <verRangeOS min="16.04" max="20.04" />
+      <compilerName>GCC</compilerName>
+      <verRangeCompiler min="5.4.0" max="Higher" />
+      <bitnCPUarch>32/64, x86/ARM</bitnCPUarch>
+    </compiler>
+    <exeType>
+      <Item>
+        <opType>PERIODIC</opType>
+        <hardRT>false</hardRT>
+        <timeConstraint>1000</timeConstraint>
+        <priority>0</priority>
+        <instanceType>Singleton</instanceType>
+      </Item>
+    </exeType>
+    <libraries>
+      <Item name="OpenRTM-aist" />
+      <Item name="omniORB" />
+      <Item name="DynamixelSDK" />
+    </libraries>
+    <organization>
+      <owner>
+        <mID>e6b189a06c9c486093c6e9185a060d4dc3c3c30100000000000000100011000101</mID>
+        <iID>00</iID>
+      </owner>
+      <dependency>OWNER</dependency>
+    </organization>
+  </Properties>
+
+  <IOVariables>
+    <Inputs>
+    </Inputs>
+    <Outputs>
+    </Outputs>
+    <InOuts>
+      <InOut name="ManipulatorCommonInterface_Common" type="class" complexName="JARA_ARM::ManipulatorCommonInterface_Common" description="アームの基本制御と状態取得のための共通サービスインターフェース">
+        <Input name="setSoftLimitJoint" type="class" complexName="JARA_ARM::LimitSeq" description="関節のソフトリミットを設定" />
+        <Input name="servoON" type="boolean" description="サーボモーターをONにする" />
+        <Input name="servoOFF" type="boolean" description="サーボモーターをOFFにする" />
+        <Output name="clearAlarms" type="class" complexName="JARA_ARM::AlarmSeq" description="アラームをクリアする" />
+        <Output name="getActiveAlarm" type="class" complexName="JARA_ARM::AlarmSeq" description="現在のアラームを取得する" />
+        <Output name="getFeedbackPosJoint" type="class" complexName="JARA_ARM::JointPos" description="関節のフィードバック位置を取得する" />
+        <Output name="getManipInfo" type="class" complexName="JARA_ARM::ManipInfo" description="マニピュレータの情報を取得する" />
+        <Output name="getSoftLimitJoint" type="class" complexName="JARA_ARM::LimitSeq" description="関節のソフトリミットを取得する" />
+        <Output name="getState" type="class" complexName="JARA_ARM::ULONG" description="現在の状態を取得する" />
+      </InOut>
+      <InOut name="ManipulatorCommonInterface_Middle" type="class" complexName="JARA_ARM::ManipulatorCommonInterface_Middle" description="アームの中間レベル制御のための共通サービスインターフェース">
+        <Input name="closeGripper" type="void" description="グリッパーを閉じる" />
+        <Input name="openGripper" type="void" description="グリッパーを開く" />
+        <Input name="moveGripper" type="class" complexName="JARA_ARM::ULONG" description="グリッパーを指定した角度比率で動かす" />
+        <Input name="movePTPJointAbs" type="class" complexName="JARA_ARM::JointPos" description="絶対関節角度でPTP動作を行う" />
+        <Input name="movePTPJointRel" type="class" complexName="JARA_ARM::JointPos" description="相対関節角度でPTP動作を行う" />
+        <Input name="setSoftLimitCartesian" type="class" complexName="JARA_ARM::LimitValue" description="直交座標系のソフトリミットを設定する" />
+        <Output name="getFeedbackPosCartesian" type="class" complexName="JARA_ARM::CarPosWithElbow" description="直交座標系のフィードバック位置を取得する" />
+        <Output name="getMaxSpeedCartesian" type="class" complexName="JARA_ARM::CartesianSpeed" description="直交座標系の最大速度を取得する" />
+        <Output name="getMaxSpeedJoint" type="class" complexName="JARA_ARM::DoubleSeq" description="関節の最大速度を取得する" />
+        <Output name="getSoftLimitCartesian" type="class" complexName="JARA_ARM::LimitValue" description="直交座標系のソフトリミットを取得する" />
+        <Output name="getHome" type="class" complexName="JARA_ARM::JointPos" description="ホームポジションを取得する" />
+        <Input name="goHome" type="void" description="ホームポジションへ移動する" />
+        <Input name="setHome" type="class" complexName="JARA_ARM::JointPos" description="ホームポジションを設定する" />
+      </InOut>
+    </InOuts>
+  </IOVariables>
+
+  <Status>
+    <executionStatus>IDLE</executionStatus>
+    <errorType>0</errorType>
+  </Status>
+
+  <Services>
+    <NoOfBasicService>2</NoOfBasicService>
+    <NoOfOptionalService>0</NoOfOptionalService>
+
+    <ServiceXML>
+      <ID>ManipulatorCommonInterface_Common</ID>
+      <pvType>Virtual</pvType>
+      <moType>MANDATORY</moType>
+      <ifURL>idl/ManipulatorCommonInterface_Common.idl</ifURL>
+      <methodList>
+        <Method>
+          <methodName>clearAlarms</methodName>
+          <argType />
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getActiveAlarm</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::AlarmSeq" valueName="alarms" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getFeedbackPosJoint</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::JointPos" valueName="pos" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getManipInfo</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::ManipInfo" valueName="mInfo" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getSoftLimitJoint</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::LimitSeq" valueName="softLimit" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getState</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::ULONG" valueName="state" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>servoOFF</methodName>
+          <argType />
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>servoON</methodName>
+          <argType />
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setSoftLimitJoint</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::LimitSeq" valueName="softLimit" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+      </methodList>
+    </ServiceXML>
+
+    <ServiceXML>
+      <ID>ManipulatorCommonInterface_Middle</ID>
+      <pvType>Virtual</pvType>
+      <moType>MANDATORY</moType>
+      <ifURL>idl/ManipulatorCommonInterface_MiddleLevel.idl</ifURL>
+      <methodList>
+        <Method>
+          <methodName>closeGripper</methodName>
+          <argType />
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getBaseOffset</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::HgMatrix" valueName="offset" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getFeedbackPosCartesian</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::CarPosWithElbow" valueName="pos" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getMaxSpeedCartesian</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::CartesianSpeed" valueName="speed" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getMaxSpeedJoint</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::DoubleSeq" valueName="speed" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getMinAccelTimeCartesian</methodName>
+          <argType>
+            <ArgSpec type="double" valueName="aclTime" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getMinAccelTimeJoint</methodName>
+          <argType>
+            <ArgSpec type="double" valueName="aclTime" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getSoftLimitCartesian</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::LimitValue" valueName="xLimit" inout="OUT" />
+            <ArgSpec type="JARA_ARM::LimitValue" valueName="yLimit" inout="OUT" />
+            <ArgSpec type="JARA_ARM::LimitValue" valueName="zLimit" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>moveGripper</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::ULONG" valueName="angleRatio" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>moveLinearCartesianAbs</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::CarPosWithElbow" valueName="carPoint" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>moveLinearCartesianRel</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::CarPosWithElbow" valueName="carPoint" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>movePTPCartesianAbs</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::CarPosWithElbow" valueName="carPoint" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>movePTPCartesianRel</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::CarPosWithElbow" valueName="carPoint" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>movePTPJointAbs</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::JointPos" valueName="jointPoints" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>movePTPJointRel</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::JointPos" valueName="jointPoints" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>openGripper</methodName>
+          <argType />
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>pause</methodName>
+          <argType />
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>resume</methodName>
+          <argType />
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>stop</methodName>
+          <argType />
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setAccelTimeCartesian</methodName>
+          <argType>
+            <ArgSpec type="double" valueName="aclTime" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setAccelTimeJoint</methodName>
+          <argType>
+            <ArgSpec type="double" valueName="aclTime" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setBaseOffset</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::HgMatrix" valueName="offset" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setControlPointOffset</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::HgMatrix" valueName="offset" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setMaxSpeedCartesian</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::CartesianSpeed" valueName="speed" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setMaxSpeedJoint</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::DoubleSeq" valueName="speed" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setMinAccelTimeCartesian</methodName>
+          <argType>
+            <ArgSpec type="double" valueName="aclTime" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setMinAccelTimeJoint</methodName>
+          <argType>
+            <ArgSpec type="double" valueName="aclTime" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setSoftLimitCartesian</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::LimitValue" valueName="xLimit" inout="IN" />
+            <ArgSpec type="JARA_ARM::LimitValue" valueName="yLimit" inout="IN" />
+            <ArgSpec type="JARA_ARM::LimitValue" valueName="zLimit" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setSpeedCartesian</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::ULONG" valueName="spdRatio" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setSpeedJoint</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::ULONG" valueName="spdRatio" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>moveCircularCartesianAbs</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::CarPosWithElbow" valueName="carPointR" inout="IN" />
+            <ArgSpec type="JARA_ARM::CarPosWithElbow" valueName="carPointT" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>moveCircularCartesianRel</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::CarPosWithElbow" valueName="carPointR" inout="IN" />
+            <ArgSpec type="JARA_ARM::CarPosWithElbow" valueName="carPointT" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>setHome</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::JointPos" valueName="jointPoint" inout="IN" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>getHome</methodName>
+          <argType>
+            <ArgSpec type="JARA_ARM::JointPos" valueName="jointPoint" inout="OUT" />
+          </argType>
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>goHome</methodName>
+          <argType />
+          <retType>JARA_ARM::RETURN_ID</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+      </methodList>
+    </ServiceXML>
+  </Services>
+
+  <Infra>
+    <middleware>
+      <InfraType>
+        <name>OpenRTM</name>
+        <version min="1.0.0" max="1.0.0" />
+      </InfraType>
+    </middleware>
+    <comms>
+      <Communication>
+        <mostTopProtocol>
+          <InfraType>
+            <name>JARA_ARM::ManipulatorCommonInterface</name>
+            <version min="20140120" max="20140120" />
+          </InfraType>
+        </mostTopProtocol>
+        <underlyingProtocol>
+          <DataBus>
+            <connectionType>USB-serial</connectionType>
+            <typePhyMac>RS-485</typePhyMac>
+            <typeNetTrans>TBD</typeNetTrans>
+            <speed value="115200" unit="bps" />
+            <additionalInfo>
+              <nv name="port_name" value="/dev/ttyUSB0" />
+            </additionalInfo>
+          </DataBus>
+        </underlyingProtocol>
+      </Communication>
+    </comms>
+    <power>
+      <ratedPower>TBD</ratedPower>
+      <maxPower>TBD</maxPower>
+    </power>
+  </Infra>
+
+  <SafeSecure>
+    <Safety>
+      <overallValidSafetyLevelType>NONE</overallValidSafetyLevelType>
+      <inSafetyLevel>
+        <safetyFunctionType>LIMWS</safetyFunctionType>
+        <validSafetyLevelType>PL</validSafetyLevelType>
+        <eachSafetyLevelPL>n</eachSafetyLevelPL>
+      </inSafetyLevel>
+      <inSafetyLevel>
+        <safetyFunctionType>PSTOP</safetyFunctionType>
+        <validSafetyLevelType>PL</validSafetyLevelType>
+        <eachSafetyLevelPL>n</eachSafetyLevelPL>
+      </inSafetyLevel>
+    </Safety>
+    <Security>
+      <overallCybSecurityLevel>0</overallCybSecurityLevel>
+      <inCybSecurityLevel type="INPUT_VALD" value="0" />
+    </Security>
+    <overallPhySecurityLevel>0</overallPhySecurityLevel>
+    <additionalInfo>
+      <nv>
+        <name>Note</name>
+        <value>Safety functions (PSTOP, LIMWS) are implemented at a basic level but do not meet formal safety standards (PL/SIL).</value>
+      </nv>
+    </additionalInfo>
+  </SafeSecure>
+
+  <Modelling>
+  </Modelling>
+
+  <ExecutableForm>
+    <exeForm>
+      <exeFileURL>devel/lib/CraneplusRTC/CraneplusRTCComp</exeFileURL>
+      <shellCmd>./CraneplusRTCComp</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>~/Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ca-certificates</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>git</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>build-essential</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>cmake</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>doxygen</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python-is-python3</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-pip</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-dev</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>libomniorb4-dev</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>omniorb-nameserver</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>omniidl</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>libboost-all-dev</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>libopencv-dev</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>openrtm-aist</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>openrtm-aist-dev</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-name.1</Name>
+          <Value>https://github.com/masahiro0720/CRANEplusRTC_ver2.git</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-branch.1</Name>
+          <Value>main</Value>
+        </nv>
+      </additionalInfo>
+    </exeForm>
+
+  </ExecutableForm>
+
+</Module>
+

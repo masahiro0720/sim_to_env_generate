@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>seed_r7_ros_pkg</ModuleName>
+    <Description>
+      SEED-R7ロボットをROS環境で制御・運用するためのメタパッケージです。ロボットのモデル記述、Gazeboシミュレーション、MoveIt!動作計画、ROSナビゲーション、そして実機制御のためのインターフェースとコントローラーなど、複数のサブパッケージから構成されています。
+    </Description>
+    <Manufacturer>
+      <Name>SEED Solutions</Name>
+      <Maintainers>hi.kondo, Yasuto Shiigi</Maintainers>
+    </Manufacturer>
+    <Examples>
+      <Item>実機/シミュレーション起動: roslaunch seed_r7_bringup seed_r7_bringup.launch</Item>
+      <Item>MoveIt!デモ起動: roslaunch seed_r7_samples demo.launch</Item>
+      <Item>マッピング/ナビゲーション: roslaunch seed_r7_navigation wheel_with_making_map.launch</Item>
+    </Examples>
+  </GenInfo>
+
+  <IDnType type="Com">
+    <moduleID>
+        <mID>b89116a46814419bb6d396b63d76b1f2C052374F530003000400000000020400</mID>
+        <iID>00</iID>
+    </moduleID>
+    <informationModelVersion>22166-202:2025</informationModelVersion>
+    <swAspects>
+        <!--seed_r7_bringupのModuleID-->
+        <moduleID>
+        <mID>b89116a46814419bb6d396b63d76b1f2404252550003000400000000020400</mID>
+        <iID>00</iID>
+        </moduleID>
+        <!--seed_r7_descriptionのModuleID-->
+        <moduleID>
+        <mID>b89116a46814419bb6d396b63d76b1f2404452430003000400000000020303</mID>
+        <iID>00</iID>
+        </moduleID>
+        <!--seed_r7_gazeboのModuleID-->
+        <moduleID>
+        <mID>b89116a46814419bb6d396b63d76b1f24047415A0000000100000000020303</mID>
+        <iID>00</iID>
+        </moduleID>
+        <!--seed_r7_moveit_configのModuleID-->
+        <moduleID>
+        <mID>b89116a46814419bb6d396b63d76b1f2404d49540003000400000000020000</mID>
+        <iID>00</iID>
+        </moduleID>
+        <!--seed_r7_navigationのModuleID-->
+        <moduleID>
+        <mID>b89116a46814419bb6d396b63d76b1f2404e41560003000400000000020300</mID>
+        <iID>00</iID>
+        </moduleID>
+        <!--seed_r7_robot_interfaceのModuleID-->
+        <moduleID>
+        <mID>b89116a46814419bb6d396b63d76b1f2404946000003000400000000020305</mID>
+        <iID>00</iID>
+        </moduleID>
+        <!--seed_r7_ros_controllerのModuleID-->
+        <moduleID>
+        <mID>b89116a46814419bb6d396b63d76b1f24043544c0003000400000000020604</mID>
+        <iID>00</iID>
+        </moduleID>
+        <!--seed_r7_samplesのModuleID-->
+        <moduleID>
+        <mID>b89116a46814419bb6d396b63d76b1f24053414d0003000400000000110000</mID>
+        <iID>00</iID>
+        </moduleID>
+    </swAspects>
+  </IDnType>
+
+  <Properties>
+    <osType type="Ubuntu" bit="64" version="20.04" />
+    <compiler>
+        <osName>Ubuntu</osName>
+        <verRangeOS min="16.04" max="Higher" />
+        <compilerName>GCC</compilerName>
+        <verRangeCompiler min="5.0" max="Higher" />
+        <bitnCPUarch>64, X86</bitnCPUarch>
+    </compiler>
+    <exeType>
+        <Item>
+        <opType>PERIODIC</opType>
+        <priority>31</priority>
+        <hardRT>false</hardRT>
+        <timeConstraint>0</timeConstraint>
+        <instanceType>MultitonStatic</instanceType>
+        </Item>
+    </exeType>
+    <Libraries>
+        <!-- 論理的な依存関係(RTCが依存する主要コンポーネント)-->
+        <!-- ROSコア -->
+        <Item name="catkin" />
+        <Item name="roscpp" />
+        <Item name="rospy" />
+        <Item name="tf" />
+        <Item name="xacro" />
+        <!-- ROS制御/ロボット関連 -->
+        <Item name="ros_control" />
+        <Item name="controller_manager" />
+        <Item name="pluginlib" />
+        <Item name="seed_smartactuator_sdk" />
+        <Item name="urdf" />
+        <!-- ROSナビゲーション -->
+        <Item name="move_base" />
+        <Item name="amcl" />
+        <Item name="map_server" />
+        <!-- ROS MoveIt! -->
+        <Item name="moveit_core" />
+        <Item name="moveit_ros_planning" />
+        <Item name="moveit_commander" />
+        <!-- C++/Python ライブラリ -->
+        <Item name="Boost" />
+        <Item name="pyserial" />
+    </Libraries>
+    <organization>
+        <owner>
+        <mID>b89116a46814419bb6d396b63d76b1f2C052374F530003000400000000020400</mID>
+        <iID>00</iID>
+        </owner>
+        <dependency>OWNER</dependency>
+        <member>
+        <member>
+            <mID>b89116a46814419bb6d396b63d76b1f2404252550003000400000000020400</mID>
+            <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+        </member>
+        <member>
+        <member>
+            <mID>b89116a46814419bb6d396b63d76b1f2404452430003000400000000020303</mID>
+            <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+        </member>
+        <member>
+        <member>
+            <mID>b89116a46814419bb6d396b63d76b1f24047415A0000000100000000020303</mID>
+            <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+        </member>
+        <member>
+        <member>
+            <mID>b89116a46814419bb6d396b63d76b1f2404d49540003000400000000020000</mID>
+            <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+        </member>
+        <member>
+        <member>
+            <mID>b89116a46814419bb6d396b63d76b1f2404e41560003000400000000020300</mID>
+            <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+        </member>
+        <member>
+        <member>
+            <mID>b89116a46814419bb6d396b63d76b1f2404946000003000400000000020305</mID>
+            <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+        </member>
+        <member>
+        <member>
+            <mID>b89116a46814419bb6d396b63d76b1f24043544c0003000400000000020604</mID>
+            <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+        </member>
+        <member>
+        <member>
+            <mID>b89116a46814419bb6d396b63d76b1f24053414d0003000400000000110000</mID>
+            <iID>00</iID>
+        </member>
+        <dependency>OWNED</dependency>
+        </member>
+    </organization>
+  </Properties>
+
+  <IOVariables>
+    <Inputs>
+        <Input name="joy_teleop_cmd_vel" type="class" complexName="geometry_msgs/Twist" description="ジョイスティックからの速度コマンド" />
+        <Input name="hand_control_request" type="class" complexName="seed_r7_ros_controller/HandControl" description="ハンド制御サービスのリクエスト" />
+        <Input name="led_control_request" type="class" complexName="seed_r7_ros_controller/LedControl" description="LED制御サービスのリクエスト" />
+        <Input name="reset_odom_request" type="class" complexName="seed_r7_ros_controller/ResetOdom" description="オドメトリリセットサービスのリクエスト" />
+        <Input name="initial_pose_request" type="class" complexName="seed_r7_ros_controller/SetInitialPose" description="初期姿勢設定サービスのリクエスト" />
+    </Inputs>
+
+    <Outputs>
+        <Output name="joint_states" type="class" complexName="sensor_msgs/JointState" description="各関節の現在の状態（位置、速度、トルク）" />
+        <Output name="robot_info" type="class" complexName="seed_r7_ros_controller/RobotInfo" description="ロボット全体の詳細情報" />
+        <Output name="robot_status" type="class" complexName="seed_r7_ros_controller/RobotStatus" description="ロボットの動作ステータス" />
+        <Output name="odom_data" type="class" complexName="nav_msgs/Odometry" description="下半身のオドメトリデータ" />
+        <Output name="scan_data" type="class" complexName="sensor_msgs/LaserScan" description="シミュレーションでのダミースキャンデータ" />
+        <Output name="map_data" type="class" complexName="nav_msgs/OccupancyGrid" description="ナビゲーションマップデータ" />
+    </Outputs>
+
+    <InOuts>
+        <InOut name="HandControl.srv" type="class" complexName="seed_r7_ros_controller/HandControl">
+        <Input name="id" type="uint8" description="制御対象のハンドID" />
+        <Input name="mode" type="string" description="動作モード（例: 'grasp', 'release'）" />
+        <Input name="value" type="uint8" description="動作パラメータ（例: 電流のパーセンテージ）" />
+        <Output name="is_success" type="bool" description="サービス実行の成否" />
+        </InOut>
+        <InOut name="LedControl.srv" type="class" complexName="seed_r7_ros_controller/LedControl">
+        <Input name="mode" type="uint8" description="LEDモード" />
+        <Input name="color" type="uint8" description="LEDの色" />
+        <Input name="id" type="uint8" description="制御対象のLED ID" />
+        <Output name="is_success" type="bool" description="サービス実行の成否" />
+        </InOut>
+        <InOut name="ResetOdom.srv" type="class" complexName="seed_r7_ros_controller/ResetOdom">
+        <Output name="is_success" type="bool" description="サービス実行の成否" />
+        </InOut>
+        <InOut name="SetInitialPose.srv" type="class" complexName="seed_r7_ros_controller/SetInitialPose">
+        <Input name="x" type="float32" unit="m" description="初期位置X座標" />
+        <Input name="y" type="float32" unit="m" description="初期位置Y座標" />
+        <Input name="yaw" type="float32" unit="rad" description="初期姿勢のヨー角" />
+        <Output name="is_success" type="bool" description="サービス実行の成否" />
+        </InOut>
+    </InOuts>
+  </IOVariables>
+
+  <Status>
+    <executionStatus>IDLE</executionStatus>
+    <errorType>0</errorType>
+  </Status>
+
+  <Services>
+    <ServiceXML>
+        <ID>HandControlService</ID>
+        <pvType>Virtual</pvType>
+        <moType>MANDATORY</moType>
+        <methodList>
+        <Method>
+            <methodName>hand_control</methodName>
+            <argType type="uint8" valueName="id" inout="IN" />
+            <argType type="string" valueName="mode" inout="IN" />
+            <argType type="uint8" valueName="value" inout="IN" />
+            <retType>bool</retType>
+            <moType>MANDATORY</moType>
+            <reqProvType>PROVIDED</reqProvType>
+            <moduleID>
+            <mID>b89116a46814419bb6d396b63d76b1f24043544c0003000400000000020604</mID>
+            <iID>00</iID>
+            </moduleID>
+        </Method>
+        </methodList>
+    </ServiceXML>
+
+    <ServiceXML>
+        <ID>NavigationService</ID>
+        <pvType>Virtual</pvType>
+        <moType>OPTIONAL</moType>
+        <methodList>
+        <Method>
+            <methodName>make_plan</methodName>
+            <argType type="class" valueName="start" inout="IN" complexName="geometry_msgs/PoseStamped" />
+            <argType type="class" valueName="goal" inout="IN" complexName="geometry_msgs/PoseStamped" />
+            <argType type="float64" valueName="tolerance" inout="IN" />
+            <retType>bool</retType>
+            <moType>MANDATORY</moType>
+            <reqProvType>PROVIDED</reqProvType>
+            <moduleID>
+            <mID>b89116a46814419bb6d396b63d76b1f2404e41560003000400000000020300</mID>
+            <iID>00</iID>
+            </moduleID>
+        </Method>
+        <Method>
+            <methodName>clear_costmaps</methodName>
+            <retType>bool</retType>
+            <moType>MANDATORY</moType>
+            <reqProvType>PROVIDED</reqProvType>
+            <moduleID>
+            <mID>b89116a46814419bb6d396b63d76b1f2404e41560003000400000000020300</mID>
+            <iID>00</iID>
+            </moduleID>
+        </Method>
+        </methodList>
+    </ServiceXML>
+
+    <ServiceXML>
+        <ID>MoveItService</ID>
+        <pvType>Virtual</pvType>
+        <moType>OPTIONAL</moType>
+        <methodList>
+        <Method>
+            <methodName>compute_ik</methodName>
+            <argType type="class" valueName="ik_request" inout="IN" complexName="moveit_msgs/GetPositionIK" />
+            <retType>class</retType>
+            <moType>MANDATORY</moType>
+            <reqProvType>PROVIDED</reqProvType>
+            <moduleID>
+            <mID>b89116a46814419bb6d396b63d76b1f2404d49540003000400000000020000</mID>
+            <iID>00</iID>
+            </moduleID>
+        </Method>
+        <Method>
+            <methodName>plan_kinematic_path</methodName>
+            <argType type="class" valueName="planning_request" inout="IN" complexName="moveit_msgs/GetMotionPlan" />
+            <retType>class</retType>
+            <moType>MANDATORY</moType>
+            <reqProvType>PROVIDED</reqProvType>
+            <moduleID>
+            <mID>b89116a46814419bb6d396b63d76b1f2404d49540003000400000000020000</mID>
+            <iID>00</iID>
+            </moduleID>
+        </Method>
+        </methodList>
+    </ServiceXML>
+
+    <ServiceXML>
+        <ID>GazeboService</ID>
+        <pvType>Virtual</pvType>
+        <moType>OPTIONAL</moType>
+        <methodList>
+        <Method>
+            <methodName>pause_physics</methodName>
+            <retType>void</retType>
+            <moType>MANDATORY</moType>
+            <reqProvType>PROVIDED</reqProvType>
+            <moduleID>
+            <mID>b89116a46814419bb6d396b63d76b1f24047415A0000000100000000020303</mID>
+            <iID>00</iID>
+            </moduleID>
+        </Method>
+        <Method>
+            <methodName>unpause_physics</methodName>
+            <retType>void</retType>
+            <moType>MANDATORY</moType>
+            <reqProvType>PROVIDED</reqProvType>
+            <moduleID>
+            <mID>b89116a46814419bb6d396b63d76b1f24047415A0000000100000000020303</mID>
+            <iID>00</iID>
+            </moduleID>
+        </Method>
+        </methodList>
+    </ServiceXML>
+  </Services>
+
+  <Infrastructure>
+    <middleware>
+        <InfraType>
+        <name>ROS 1</name>
+        <version min="melodic" max="noetic" />
+        </InfraType>
+        <InfraType>
+        <name>MoveIt!</name>
+        <version min="-" max="-" />
+        </InfraType>
+        <InfraType>
+        <name>Gazebo</name>
+        <version min="-" max="-" />
+        </InfraType>
+        <InfraType>
+        <name>ROS Navigation Stack</name>
+        <version min="-" max="-" />
+        </InfraType>
+    </middleware>
+    <comms>
+        <Communication>
+        <mostTopProtocol>
+            <InfraType>
+            <name>SEED-Driver Protocol</name>
+            <version min="1.0" max="Higher" />
+            </InfraType>
+        </mostTopProtocol>
+        <underlyingProtocol>
+            <DataBus>
+            <connectionType>USB-A</connectionType>
+            <typePhyMac>USB</typePhyMac>
+            <typeNetTrans>Serial</typeNetTrans>
+            <speed value="115.2" unit="kbps" />
+            </DataBus>
+        </underlyingProtocol>
+        </Communication>
+        <Communication>
+            <mostTopProtocol>
+                <InfraType>
+                    <name>ROS Messages</name>
+                    <version min="-" max="-" />
+                </InfraType>
+            </mostTopProtocol>
+            <underlyingProtocol>
+                <DataBus>
+                    <connectionType>RJ45</connectionType>
+                    <typePhyMac>Ethernet</typePhyMac>
+                    <typeNetTrans>TCP/IP</typeNetTrans>
+                    <speed value="-" unit="-" />
+                </DataBus>
+            </underlyingProtocol>
+        </Communication>
+    </comms>
+  </Infrastructure>
+
+  <SafeSecure>
+    <Safety>
+        <overall mode="PL">d</overall>
+        <overall mode="SIL">2</overall>
+        <inSafetyLevel>
+        <safetyFunctionType>SRSC</safetyFunctionType>
+        <validSafetyLevelType>PL</validSafetyLevelType>
+        <eachSafetyLevelPL>d</eachSafetyLevelPL>
+        </inSafetyLevel>
+        <inSafetyLevel>
+        <safetyFunctionType>LIMWS</safetyFunctionType>
+        <validSafetyLevelType>PL</validSafetyLevelType>
+        <eachSafetyLevelPL>b</eachSafetyLevelPL>
+        </inSafetyLevel>
+        <inSafetyLevel>
+        <safetyFunctionType>ESTOP</safetyFunctionType>
+        <validSafetyLevelType>PL</validSafetyLevelType>
+        <eachSafetyLevelPL>d</eachSafetyLevelPL>
+        </inSafetyLevel>
+    </Safety>
+    <Security>
+        <CyberSecurity>
+        <OverallCybSecurityLevel>1</OverallCybSecurityLevel>
+        <inCybSecurityLevel type="INPUT_VALD" value="2" />
+        <inCybSecurityLevel type="SW_INTGT" value="1" />
+        <inCybSecurityLevel type="ERR_HNDL" value="1" />
+        </CyberSecurity>
+    </Security>
+    <additionalInfo>
+        <nv>
+        <name>required_udev_rule</name>
+        <value>KERNEL=="ttyUSB*", MODE="0666"</value>
+        </nv>
+        <nv>
+        <name>Serial Communication Details</name>
+        <value>Communication via /dev/ttyACM0 at 115200 baud</value>
+        </nv>
+    </additionalInfo>
+  </SafeSecure>
+
+  <Modelling>
+    <simulationModel>
+        <simulator>Gazebo</simulator>
+        <mdf type="URDF">
+        <Item>seed_r7_description/typef/noid.urdf.xacro</Item>
+        <Item>seed_r7_description/typeg/noid.urdf.xacro</Item>
+        <Item>seed_r7_description/urdf/gazebo.xacro</Item>
+        </mdf>
+        <mdf type="DAE">
+        <Item>seed_r7_description/meshes/typeF_upperbody/LARM_LINK1_mesh.dae</Item>
+        <Item>seed_r7_description/meshes/typeF_upperbody/NECK_LINK1_mesh.dae</Item>
+        <Item>seed_r7_description/meshes/typeF_upperbody/upper_base.dae</Item>
+        <Item>seed_r7_description/meshes/typeG_arm/elbow_link.dae</Item>
+        </mdf>
+        <dynamicSW>
+        <exeFileURL>src/seed_r7_gazebo/src/MimicPlugin.cpp</exeFileURL>
+        <shellCmd>roslaunch seed_r7_gazebo seed_r7_empty_world.launch</shellCmd>
+        </dynamicSW>
+    </simulationModel>
+  </Modelling>
+
+  <ExecutableForm>
+    <exeForm>
+        <exeFileURL>devel/lib/seed_r7_ros_controller/seed_r7_ros_controller</exeFileURL>
+        <shellCmd>roslaunch seed_r7_bringup seed_r7_bringup.launch</shellCmd>
+        <additionalInfo>
+        <nv>
+            <name>pre_execution_command</name>
+            <value>sudo chmod 666 /dev/ttyACM0</value>
+        </nv>
+        </additionalInfo>
+    </exeForm>
+    <exeForm>
+        <exeFileURL>devel/lib/seed_r7_ros_controller/seed_r7_ros_controller</exeFileURL>
+        <shellCmd>roslaunch seed_r7_bringup moveit.launch</shellCmd>
+        <additionalInfo>
+        <nv>
+            <name>pre_execution_command</name>
+            <value>sudo chmod 666 /dev/ttyACM0</value>
+        </nv>
+        </additionalInfo>
+    </exeForm>
+    <exeForm>
+        <exeFileURL>src/seed_r7_samples/scripts/demo.py</exeFileURL>
+        <shellCmd>roslaunch seed_r7_samples demo.launch</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>~/Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>git</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>build-essential</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>cmake</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-pip</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-catkin-tools</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-rosdep</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-rosinstall</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-rosinstall-generator</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-wstool</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>x11-apps</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>mesa-utils</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>libgl1-mesa-glx</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>libgl1-mesa-dri</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-moveit</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-moveit-visual-tools</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-rviz</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-joint-state-publisher-gui</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-ros-control</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-ros-controllers</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-gazebo-ros</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-tf2-ros</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-geometry-msgs</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-sensor-msgs</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-gazebo-ros-pkgs</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-gazebo-ros-control</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-gazebo-plugins</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-move-base-msgs</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-robot-state-publisher</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-navigation</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-map-server</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-amcl</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-dwa-local-planner</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-${ROS_DISTRO}-global-planner</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-name.1</Name>
+          <Value>https://github.com/seed-solutions/seed_smartactuator_sdk.git</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-branch.1</Name>
+          <Value>main</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-name.2</Name>
+          <Value>https://github.com/seed-solutions/seed_r7_ros_pkg.git</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-branch.2</Name>
+          <Value>main</Value>
+        </nv>
+      </additionalInfo>
+    </exeForm>
+
+  </ExecutableForm>
+
+</Module>
+

@@ -1,0 +1,25 @@
+MIDDLEWARE_NAME: OpenRTM
+OS_NAME: Ubuntu
+OS_VERSION: 18.04
+COMPILER_NAME: GCC
+COMPILER_VERSION: min:7.5.0,max:9.0
+
+APT_PACKAGES:
+- git
+- build-essential
+- cmake
+- python-is-python3
+- python3-pip
+- python3-dev
+- openrtm-aist
+- openrtm-aist-dev
+- libboost-all-dev
+- libudev-dev
+- libomiorb4-dev
+- omniorb-namesever
+- omniid
+
+GIT_REPOSITORIES:
+- gitURL1
+  url: https://github.com/ogata-lab-admin/MikataArmRTC.git
+  branch: main

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>crane_aruco_control</ModuleName>
+    <Description>PCカメラにより画像を取得し、ARマーカーを検出する。検出したARマーカーのIDをcrane_plus_arucoソフトウェアモジュールに送信する。</Description>
+    <Manufacturer>
+      <Name>Meijo University</Name>
+      <Authors>Masahiro Saito</Authors>
+      <Maintainers>Masahiro Saito</Maintainers>
+      <CopyrightOwner>Masahiro Saito</CopyrightOwner>
+    </Manufacturer>
+    <Examples>
+      <Item>Real Robot execute command: ros2 launch crane_aruco_control aruco_standalone.launch.py</Item>
+		</Examples>
+  </GenInfo>
+
+  <idnType type="Bas">
+    <moduleID>
+        <mID>000000000000000000000000000000004000000000000000000000008C1400</mID>
+        <iID>00</iID>
+    </moduleID>
+    <informationModelVersion>1.0</informationModelVersion>
+  </idnType>
+
+  <Properties>
+    <osType type="Linux" bit="BIT64" version="20.04" />
+    <compiler>
+        <osName>Ubuntu</osName>
+        <verRangeOS min="18.04" max="22.04" />
+        <compilerName>Python</compilerName>
+        <verRangeCompiler min="3.10" max="Higher" />
+        <bitnCPUarch>64, x86_64</bitnCPUarch>
+    </compiler>
+    <exeType>
+        <Item>
+        <opType>PERIODIC</opType>
+        <hardRT>false</hardRT>
+        <timeConstraint>33333.33</timeConstraint>
+        <instanceType>MultitonStatic</instanceType>
+        <priority>128</priority>
+        </Item>
+        <Item>
+        <opType>EVENTDRIVEN</opType>
+        <hardRT>false</hardRT>
+        <timeConstraint>0</timeConstraint>
+        <instanceType>MultitonStatic</instanceType>
+        <priority>128</priority>
+        </Item>
+    </exeType>
+    <Libraries>
+        <Item name="rclpy" />
+        <Item name="sensor_msgs" />
+        <Item name="cv_bridge" />
+        <Item name="geometry_msgs" />
+        <Item name="OpenCV" />
+        <Item name="numpy" />
+        <Item name="git" />
+        <Item name="python3-pip" />
+        <Item name="python3-rosdep" />
+        <Item name="python3-colcon-common-extensions" />
+        <Item name="build-essential" />
+        <Item name="udev" />
+        <Item name="python3-opencv" />
+        <Item name="python3-numpy" />
+        <Item name="ros-humble-cv-bridge" />
+    </Libraries>
+    <Property name="marker_size" type="Float" unit="meter" description="Physical size of the Aruco marker for pose estimation" value="0.055">
+        <immutable>true</immutable>
+    </Property>
+  </Properties>
+
+  <IOVariables>
+    <Inputs>
+        <Input name="/custom_image_raw" 
+            type="class" 
+            complex="class" 
+            complexName="sensor_msgs/Image" 
+            unit="none" 
+            description="Raw image data stream from camera publisher node." />
+        
+        <Input name="/camera_info" 
+            type="class" 
+            complex="class" 
+            complexName="sensor_msgs/CameraInfo" 
+            unit="none" 
+            description="Camera intrinsic parameters and distortion coefficients." />
+    </Inputs>
+    <Outputs>
+        <Output name="/custom_image_raw" 
+                type="class" 
+                complex="class" 
+                complexName="sensor_msgs/Image" 
+                unit="none" 
+                description="Publishes image data stream for image processing nodes." />
+        
+        <Output name="/camera_info" 
+                type="class" 
+                complex="class" 
+                complexName="sensor_msgs/CameraInfo" 
+                unit="none" 
+                description="Publishes camera intrinsic parameters (required for detection)." />
+        
+        <Output name="crane_command" 
+                type="string" 
+                description="Control command string sent to the CRANE+ arm driver node (std_msgs/String)." />
+    </Outputs>
+    <InOuts>
+        </InOuts>
+  </IOVariables>
+
+  <Status>
+    <executionStatus>IDLE</executionStatus>
+    <errorType>0</errorType>
+  </Status>
+
+  <services>
+    <NoOfBasicService>2</NoOfBasicService>
+    <NoOfOptionalService>0</NoOfOptionalService>
+    <ServiceXML>
+        <ID>CameraFeedPublisher</ID>
+        <pvType>Virtual</pvType>
+        <moType>MANDATORY</moType>
+        <methodList>
+        <Method>
+            <methodName>StartImageStream</methodName>
+            <argType>
+            <ArgSpec type="void" valueName="none" inout="IN" />
+            </argType>
+            <retType>bool</retType>
+            <moType>MANDATORY</moType>
+            <reqProvType>PROVIDED</reqProvType>
+            <additionalInfo>
+            <nv>
+                <Name>Protocol</Name>
+                <Value>ROS 2 Topic (sensor_msgs/Image, sensor_msgs/CameraInfo)</Value>
+            </nv>
+            <nv>
+                <Name>Frequency</Name>
+                <Value>30 Hz (PERIODIC)</Value>
+            </nv>
+            </additionalInfo>
+        </Method>
+        </methodList>
+    </ServiceXML>
+    <ServiceXML>
+        <ID>ArucoControlService</ID>
+        <pvType>Virtual</pvType>
+        <moType>MANDATORY</moType>
+        <methodList>
+        <Method>
+            <methodName>ExecuteArmCommand</methodName>
+            
+            <argType>
+            <ArgSpec type="uint8" valueName="marker_id" inout="IN">
+                <additionalInfo>
+                <nv>
+                    <Name>Range</Name>
+                    <Value>1 to 5</Value>
+                </nv>
+                <nv>
+                    <Name>CommandMap</Name>
+                    <Value>1:RESET_ARM, 2:HOME_POSE, 3:OPEN_GRIPPER, 4:CLOSE_GRIPPER, 5:WAVE_HAND</Value>
+                </nv>
+                </additionalInfo>
+            </ArgSpec>
+            </argType>
+            
+            <retType>bool</retType>
+            <moType>MANDATORY</moType>
+            <reqProvType>PROVIDED</reqProvType>
+            
+            <additionalInfo>
+            <nv>
+                <Name>Protocol</Name>
+                <Value>ROS 2 Topic (crane_command)</Value>
+            </nv>
+            <nv>
+                <Name>Trigger</Name>
+                <Value>EventDriven (Image Detection Success)</Value>
+            </nv>
+            </additionalInfo>
+        </Method>
+        </methodList>
+    </ServiceXML>
+  </services>
+
+  <Infrastructure>
+    <middleware>
+        <InfraType>
+        <name>ROS 2</name>
+        <version min="foxy" max="humble" />
+        </InfraType>
+    </middleware>
+    <additionalInfo>
+        <nv name="Communication_Mechanism" value="ROS 2 (DDS/RMW) Topic-based" />
+        <nv name="Underlying_Protocol_Assumption" value="UDP/IP over Ethernet/WiFi" />
+    </additionalInfo>
+  </Infrastructure>
+
+  <SafeSecure>
+    <Safety>
+        <overallValidSafetyLevelType>NONE</overallValidSafetyLevelType>
+        <overallSafetyLevelPL>n</overallSafetyLevelPL>
+        <overallSafetyLevelSIL>0</overallSafetyLevelSIL>
+    </Safety>
+    <Security>
+        <CyberSecurity>
+        <OverallCybSecurityLevel>1</OverallCybSecurityLevel>
+        
+        <inCybSecurityLevel type="INPUT_VALD" value="1"/>
+        <inCybSecurityLevel type="ERR_HNDL" value="1"/>
+        <inCybSecurityLevel type="SW_INTGT" value="1"/>
+        
+        </CyberSecurity>
+    </Security>
+    <additionalInfo>
+        <nv name="Safety_Scope" value="Safety functions are deferred to the underlying CRANE+ driver/safety controller."/>
+        <nv name="Security_Assumption" value="Assumes ROS 2 provides basic network security (DDS Layer)."/>
+    </additionalInfo>
+  </SafeSecure>
+
+  <ExecutableForm>
+    <exeForm>
+        <exeFileURL>crane_aruco_control/camera_publisher_node:main</exeFileURL>
+        <shellCmd>ros2 run crane_aruco_control camera_publisher</shellCmd>
+        <additionalInfo>
+        <nv name="Execution_Target" value="Camera Data Publisher Node" />
+        </additionalInfo>
+    </exeForm>
+
+    <exeForm>
+        <exeFileURL>crane_aruco_control/aruco_controller_node:main</exeFileURL>
+        <shellCmd>ros2 run crane_aruco_control aruco_controller</shellCmd>
+        <additionalInfo>
+        <nv name="Execution_Target" value="Aruco Detection and Control Node" />
+        </additionalInfo>
+    </exeForm>
+
+    <exeForm>
+        <exeFileURL>launch/aruco_standalone.launch.py</exeFileURL>
+        <shellCmd>ros2 launch crane_aruco_control aruco_standalone.launch.py</shellCmd>
+        <additionalInfo>
+        <nv name="Execution_Type" value="Orchestration via ROS 2 Launch" />
+        <nv name="Required_ROS_Version" value="Foxy or later" />
+        </additionalInfo>
+    </exeForm>
+
+    <exeForm>
+      <additionalInfo>
+        <nv>
+          <middleware>ROS</middleware>
+          <version min="2-foxy" max="2-humble" />
+        </nv>
+      </additionalInfo>
+      <additionalInfo>
+        <nv>
+          <Libraries>
+            <Item name="git" />
+            <Item name="python3-pip" />
+            <Item name="python3-rosdep" />
+            <Item name="python3-colcon-common-extensions" />
+            <Item name="build-essential" />
+            <Item name="udev" />
+            <Item name="python3-opencv" />
+            <Item name="python3-numpy" />
+            <Item name="ros-humble-cv-bridge" />
+          </Libraries>
+        </nv>
+      </additionalInfo>
+      <additionalInfo>
+        <nv>
+          <gitURL>
+            <Item name="crane_aruco_control" url="https://github.com/masahiro0720/crane_aruco_control.git" branch="main" />
+          </gitURL>
+        </nv>
+      </additionalInfo>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>~/Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>git</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-pip</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-rosdep</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-colcon-common-extensions</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>build-essential</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>udev</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-opencv</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>python3-numpy</Value>
+        </nv>
+        <nv>
+          <Name>Libraries</Name>
+          <Value>ros-humble-cv-bridge</Value>
+        </nv>
+      </additionalInfo>
+      <Properties>
+        <Property name="gitURL" type="main" immutable="true" description="crane_aruco_control" value="https://github.com/masahiro0720/crane_aruco_control.git"/>
+      </Properties>
+    </exeForm>
+
+  </ExecutableForm>
+
+</Module>
+

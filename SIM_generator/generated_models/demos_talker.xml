@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module type="SIM">
+  <moduleName>talker</moduleName>
+  <description>A basic ROS 2 publisher node that periodically publishes 'Hello World: &lt;count_&gt;' string messages to the 'chatter' topic.</description>
+  <manufacturer>Open Source Robotics Foundation, Inc.</manufacturer>
+  <examples>ros2 run demo_nodes_cpp talker</examples>
+  <idnType type="Bas"><moduleID><mID>00000000000000000000000000000000000000000000000000000000000000</mID><iID>00</iID></moduleID>
+    <informationModelVersion>1.0</informationModelVersion>
+  </idnType>
+  <properties>
+    <osType type="Ubuntu" bit="BIT64" version="24.04" />
+    <compiler><osName>Ubuntu</osName><verRangeOS min="24.04" max="24.04" /><compilerName>GCC</compilerName><verRangeCompiler min="13.3.0" max="Higher" /><bitnCPUarch>64, X86</bitnCPUarch></compiler>
+    <exeType>
+      <Item><opType>PERIODIC</opType><priority>10</priority><hardRT>false</hardRT><timeConstraint>1000000.0</timeConstraint><instanceType>MultitonComm</instanceType></Item>
+    </exeType>
+    <Libraries>
+      <Item name="rclcpp" version="" />
+      <Item name="std_msgs" version="" />
+      <Item name="rclcpp_components" version="" />
+    </Libraries>
+      <Property name="qos_profile" type="String" unit="" description="Publisher Quality of Service profile">
+        <value>KeepLast{7}</value>
+        <immutable>true</immutable>
+      </Property>
+  </properties>
+  <ioVariables>
+    <Outputs>
+    <Output name="chatter" type="std_msgs::msg::String" value="" unit="" description="The topic for publishing 'Hello World' messages." />
+    </Outputs>
+  </ioVariables>
+  <Status>
+    <executionStatus>IDLE</executionStatus>
+    <errorType>0</errorType>
+  </Status>
+  <services>
+    <NoOfBasicService>0</NoOfBasicService>
+    <NoOfOptionalService>0</NoOfOptionalService>
+  </services>
+  <infra>
+    <Middleware>
+      <InfraType>
+        <Name>ROS</Name>
+        <Version min="2-jazzy" max="2-jazzy" />
+      </InfraType>
+    </Middleware>
+    <comms>
+      <Communication>
+        <mostTopProtocol>
+          <InfraType>
+            <Name>Private Protocol</Name>
+            <Version min="1.0" max="1.0" />
+          </InfraType>
+        </mostTopProtocol>
+        <underlyingProtocol>
+          <Databus>
+            <ConnectorType>RJ45</ConnectorType>
+            <TypePhyMac>Ethernet</TypePhyMac>
+          </Databus>
+        </underlyingProtocol>
+      </Communication>
+    </comms>
+  </infra>
+  <safeSecure>
+    <Safety>
+      <overall mode="PL">n</overall>
+    </Safety>
+    <Security>
+      <CyberSecurity>
+        <OverallCybSecurityLevel>0</OverallCybSecurityLevel>
+      </CyberSecurity>
+    </Security>
+  </safeSecure>
+  <modelling>
+  </modelling>
+  <execForm>
+    <exeForm>
+      <exeFileURL>demos/demos_node_cpp/src/topics/talker.cpp</exeFileURL>
+      <ShellCmd>ros2 run demo_nodes_cpp talker</ShellCmd>
+    </exeForm>
+  </execForm>
+</Module>

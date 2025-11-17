@@ -1,0 +1,26 @@
+services:
+  module1:
+    build:
+      context: .
+      dockerfile: mikata_aruco_ROS_SIM_ROS_noetic_ros-base_profile.Dockerfile
+    image: mikata_aruco_ros_sim_ros_noetic_ros_base_profile_image
+    container_name: mikata_aruco_ros_sim_ros_noetic_ros_base_profile_container
+    # --- [Req 1] Enable All USB Devices ---
+    privileged: true
+    devices:
+    - /dev/bus/usb:/dev/bus/usb
+    # --- [Req 2] Use Host Network ---
+    network_mode: host
+    # --- [Req 3] Enable GUI (X11) Forwarding ---
+    environment:
+    - DISPLAY=${DISPLAY}
+    - QT_X11_NO_MITSHM=1
+    volumes:
+    - /tmp/.X11-unix:/tmp/.X11-unix
+    # --- [Req 4] Start with Interactive Terminal (bash) ---
+    tty: true
+    stdin_open: true
+    command:
+    - bash
+    # --- (Optional) Auto-Restart Policy ---
+    restart: unless-stopped
