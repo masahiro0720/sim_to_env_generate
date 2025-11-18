@@ -1,4 +1,4 @@
-ROS_IMAGE: ros:noetic-desktop-full
+ROS_IMAGE: ros:noetic-ros-base
 ROS_DISTRO: noetic
 
 APT_PACKAGES:

@@ -8,13 +8,13 @@ ENV ROS_DISTRO=noetic
 # Install required packages
 RUN apt-get update && apt-get install -y \
     git \
-    build-essential \
-    cmake \
     python3-catkin-tools \
     python3-rosdep \
     python3-rosinstall \
     python3-rosinstall-generator \
     python3-wstool \
+    build-essential \
+    cmake \
     ros-noetic-catkin \
     ros-noetic-moveit \
     ros-noetic-joint-state-publisher-gui \
@@ -32,10 +32,8 @@ WORKDIR /root/catkin_ws/src
 # Clone required repositories
 RUN git clone -b noetic https://github.com/ROBOTIS-GIT/dynamixel-workbench.git 
 RUN git clone -b noetic https://github.com/ROBOTIS-GIT/DynamixelSDK.git 
-RUN git clone -b noetic https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git 
 RUN git clone https://github.com/rsdlab/MikataArm.git 
 RUN git clone https://github.com/ROBOTIS-GIT/robotis_manipulator.git 
-RUN git clone https://github.com/masahiro0720/arm_command_translator.git 
 
 # Resolve dependencies
 WORKDIR /root/catkin_ws

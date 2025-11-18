@@ -2,9 +2,9 @@ services:
   module1:
     build:
       context: .
-      dockerfile: mikata_aruco_ROS_SIM_ROS_noetic_ros-base_profile.Dockerfile
-    image: mikata_aruco_ros_sim_ros_noetic_ros_base_profile_image
-    container_name: mikata_aruco_ros_sim_ros_noetic_ros_base_profile_container
+      dockerfile: MikataArm_ROS_open_manipulator_ROS_noetic_ros-base_profile.Dockerfile
+    image: mikataarm_ros_open_manipulator_ros_noetic_ros_base_profile_image
+    container_name: mikataarm_ros_open_manipulator_ros_noetic_ros_base_profile_container
     # --- [Req 1] Enable All USB Devices ---
     privileged: true
     devices:
