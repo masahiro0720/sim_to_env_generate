@@ -1,9 +1,9 @@
-# Base image: ros:noetic-desktop-full
-FROM ros:noetic-desktop-full
+# Base image: ros:noetic-ros-base
+FROM ros:noetic-ros-base
 
 # Disable interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
-ENV ROS_DISTRO=noetic-desktop-full
+ENV ROS_DISTRO=noetic
 
 # Install required packages
 RUN apt-get update && apt-get install -y \
@@ -30,8 +30,9 @@ RUN mkdir -p /root/catkin_ws/src
 WORKDIR /root/catkin_ws/src
 
 # Clone required repositories
-RUN git clone -b noetic https://github.com/ROBOTIS-GIT/dynamixel-workbench.git 
 RUN git clone -b noetic https://github.com/ROBOTIS-GIT/DynamixelSDK.git 
+RUN git clone -b noetic https://github.com/ROBOTIS-GIT/dynamixel-workbench.git 
+RUN git clone -b noetic https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git 
 RUN git clone https://github.com/rsdlab/MikataArm.git 
 RUN git clone https://github.com/ROBOTIS-GIT/robotis_manipulator.git 
 

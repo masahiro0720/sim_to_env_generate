@@ -458,7 +458,7 @@
         </nv>
         <nv>
           <Name>gitURL-name.1</Name>
-          <Value>https://github.com/ROBOTIS-GIT/dynamixel-workbench.git</Value>
+          <Value>https://github.com/ROBOTIS-GIT/DynamixelSDK.git</Value>
         </nv>
         <nv>
           <Name>gitURL-branch.1</Name>
@@ -466,33 +466,40 @@
         </nv>
         <nv>
           <Name>gitURL-name.2</Name>
-          <Value>https://github.com/ROBOTIS-GIT/DynamixelSDK.git</Value>
+          <Value>https://github.com/ROBOTIS-GIT/dynamixel-workbench.git</Value>
         </nv>
         <nv>
           <Name>gitURL-branch.2</Name>
           <Value>required</Value>
         </nv>
-        <nv>
-          <Name>gitURL-name.3</Name>
-          <Value>https://github.com/rsdlab/MikataArm.git</Value>
-        </nv>
+	      <nv>
+	        <Name>gitURL-name.3</Name>
+	        <Value>https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git</Value>
+	      </nv>
         <nv>
           <Name>gitURL-branch.3</Name>
-          <Value>main</Value>
+          <Value>required</Value>
         </nv>
         <nv>
           <Name>gitURL-name.4</Name>
-          <Value>https://github.com/ROBOTIS-GIT/robotis_manipulator.git</Value>
+          <Value>https://github.com/rsdlab/MikataArm.git</Value>
         </nv>
         <nv>
           <Name>gitURL-branch.4</Name>
           <Value>main</Value>
         </nv>
-        
+        <nv>
+          <Name>gitURL-name.5</Name>
+          <Value>https://github.com/ROBOTIS-GIT/robotis_manipulator.git</Value>
+        </nv>
+        <nv>
+          <Name>gitURL-branch.5</Name>
+          <Value>main</Value>
+        </nv>      
       </additionalInfo>
     </exeForm>
-
   </ExecutableForm>
 
 </Module>
+
 

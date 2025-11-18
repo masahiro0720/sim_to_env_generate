@@ -1,7 +1,6 @@
 ROS_IMAGE: ros:noetic-ros-base
 ROS_DISTRO: noetic
 
-
 APT_PACKAGES:
 - git
 - python3-catkin-tools
@@ -22,14 +21,17 @@ APT_PACKAGES:
 
 GIT_REPOSITORIES:
 - gitURL1
-  url: https://github.com/ROBOTIS-GIT/dynamixel-workbench.git
-  branch: noetic
-- gitURL2
   url: https://github.com/ROBOTIS-GIT/DynamixelSDK.git
   branch: noetic
+- gitURL2
+  url: https://github.com/ROBOTIS-GIT/dynamixel-workbench.git
+  branch: noetic
 - gitURL3
+  url: https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git
+  branch: noetic
+- gitURL4
   url: https://github.com/rsdlab/MikataArm.git
   branch: main
-- gitURL4
+- gitURL5
   url: https://github.com/ROBOTIS-GIT/robotis_manipulator.git
   branch: main

@@ -30,8 +30,9 @@ RUN mkdir -p /root/catkin_ws/src
 WORKDIR /root/catkin_ws/src
 
 # Clone required repositories
-RUN git clone -b noetic https://github.com/ROBOTIS-GIT/dynamixel-workbench.git 
 RUN git clone -b noetic https://github.com/ROBOTIS-GIT/DynamixelSDK.git 
+RUN git clone -b noetic https://github.com/ROBOTIS-GIT/dynamixel-workbench.git 
+RUN git clone -b noetic https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git 
 RUN git clone https://github.com/rsdlab/MikataArm.git 
 RUN git clone https://github.com/ROBOTIS-GIT/robotis_manipulator.git 
 
