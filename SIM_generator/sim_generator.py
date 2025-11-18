@@ -108,6 +108,7 @@ ENUMS = {
 }
 
 
+
 # --- 2. セッションステートの初期化 ---
 
 def initialize_state():
