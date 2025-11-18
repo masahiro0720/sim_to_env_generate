@@ -1,25 +1,25 @@
 # sim_to_env_generate
 
-ISO22166-202規格に準拠したロボットソフトウェア情報モデル（SIM）から、Dockerベースの開発環境（DockerfileおよびDocker Compose）を自動生成するためのツールキットです。
+ISO22166-202規格に準拠したロボットソフトウェア情報モデル（SIM）から、Dockerベースの開発環境（DockerfileおよびDocker Compose）を自動生成するためのツールキット。
 
 このリポジトリは、ロボットアプリケーションの環境構築を自動化し、再現性を高めることを目的としています。
 
-## 🚀 ワークフロー概要
+## プロジェクト概要
 
 このツールキットは、以下の3つの主要なステップ（ディレクトリ）で構成されています。
 
-1.  **[🏭 SIM_generator]**:
+1.  **SIM_generator (GUI):**
     GUIを使用して、ロボットの仕様を定義した情報モデル（`.xml`）を作成します。
-2.  **[📜 Dockerfile_generator]**:
+2.  **Dockerfile_generator:**
     `1` で作成した `.xml` を読み込み、ROSやOpenRTMの環境を構築する `Dockerfile` を自動生成します。
-3.  **[🐳 robot_container_env]**:
+3.  **robot_container_env:**
     `2` で生成された `Dockerfile` 群を元に、複数のコンテナを協調させる `docker-compose.yml` を自動生成します。
 
 ---
 
-## 🛠️ 動作環境の構築 (セットアップ)
+## 実行環境の構築 (セットアップ)
 
-このリポジトリの全機能を利用するために、以下の手順でセットアップを行ってください。
+このリポジトリの全機能を利用するためのセットアップ手順です。
 
 1.  **リポジトリのクローン**
     ```bash
@@ -28,8 +28,9 @@ ISO22166-202規格に準拠したロボットソフトウェア情報モデル�
     ```
 
 2.  **Python仮想環境の作成と有効化**
-    * リポジトリのルートで仮想環境を作成することを推奨します。
+    * `SIM_generator` ディレクトリ内で仮想環境を作成します。
     ```bash
+    cd SIM_generator
     python3 -m venv venv
     source venv/bin/activate
     ```
@@ -40,7 +41,7 @@ ISO22166-202規格に準拠したロボットソフトウェア情報モデル�
     # (venv) が有効化されていることを確認
     
     # SIM_generator (GUI) の依存関係をインストール
-    (venv)$ pip install -r SIM_generator/requirements.txt
+    (venv)$ pip install -r requirements.txt
     
     # generate_compose.py の依存関係をインストール
     (venv)$ pip install pyyaml
@@ -50,18 +51,19 @@ ISO22166-202規格に準拠したロボットソフトウェア情報モデル�
 
 ---
 
-## 📖 使い方 (ワークフロー)
+## 使用方法
 
 セットアップが完了したら、以下の3ステップでコンテナ環境を生成できます。
+**（作業は `venv` を有効化したターミナルで続けてください）**
 
 ### Step 1: SIM (情報モデル) の作成 (`SIM_generator/`)
 
 まず、GUIを使用してロボットソフトウェアの仕様を定義する `.xml` ファイルを生成します。
 
 1.  **GUIの起動**
+    * セットアップ直後は既に `SIM_generator` ディレクトリにいます。
     ```bash
     # (venv) が有効化されていることを確認
-    (venv)$ cd SIM_generator
     (venv)$ streamlit run sim_generator.py
     ```
 
@@ -73,7 +75,7 @@ ISO22166-202規格に準拠したロボットソフトウェア情報モデル�
     * 完成したら、`.xml` ファイルをエクスポート（ダウンロードまたはサーバー保存）します。
 
 > **推奨:**
-> 生成された `.xml` ファイルは、プロジェクトルートの **`SIM/`** ディレクトリに保存することを推奨します。Step 2のスクリプトは、デフォルトでこのディレクトリを参照します。
+> 生成された `.xml` ファイルは、プロジェクトルートの **`SIM/`** ディレクトリに保存してください。Step 2のスクリプトは、デフォルトでこのディレクトリを参照します。
 
 ### Step 2: Dockerfile の自動生成 (`Dockerfile_generator/`)
 
@@ -83,7 +85,7 @@ ISO22166-202規格に準拠したロボットソフトウェア情報モデル�
     * `Generate_all_file.py` を実行します。
     ```bash
     # (venv) が有効化されていることを確認
-    (venv)$ cd Dockerfile_generator  # もし別のディレクトリにいたら移動
+    (venv)$ cd ../Dockerfile_generator  # ディレクトリを移動
     (venv)$ python3 Generate_all_file.py [オプション]
     ```
 
@@ -94,7 +96,7 @@ ISO22166-202規格に準拠したロボットソフトウェア情報モデル�
 3.  **出力**
     * 生成された `Dockerfile` は **`robot_container_env/Dockerfile/`** ディレクトリ内に保存されます。
 
-#### ⚙️ `Generate_all_file.py` のオプション
+#### `Generate_all_file.py` のオプション
 
 | 引数 | 説明 |
 | :--- | :--- |
@@ -111,7 +113,7 @@ ISO22166-202規格に準拠したロボットソフトウェア情報モデル�
     * `generate_compose.py` を実行します。
     ```bash
     # (venv) が有効化されていることを確認
-    (venv)$ cd robot_container_env  # もし別のディレクトリにいたら移動
+    (venv)$ cd ../robot_container_env  # ディレクトリを移動
     (venv)$ python3 generate_compose.py [オプション]
     ```
 
@@ -123,7 +125,7 @@ ISO22166-202規格に準拠したロボットソフトウェア情報モデル�
     * **`robot_container_env/compose_files/`** 内に、`compose_ver1`, `compose_ver2`, ... という名前で新しいディレクトリが作成されます。
     * この新ディレクトリ内に、生成された `docker-compose.yml` と、対象となった `Dockerfile` のコピーがセットで格納されます。
 
-#### ⚙️ `generate_compose.py` のオプション
+#### `generate_compose.py` のオプション
 
 | 引数 | 説明 |
 | :--- | :--- |
