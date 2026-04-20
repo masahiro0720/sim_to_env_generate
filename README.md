@@ -145,6 +145,7 @@ Windows側に [usbipd-win](https://github.com/dorssel/usbipd-win) をインス�
 （WindowsのコマンドプロンプトまたはPowerShellで以下のコマンドを実行することでインストール可能です）
 ```powershell
 winget install --interactive --exact dorssel.usbipd-win
+```
 
 ### デバイスマウント確立までの3ステップ
 
@@ -152,28 +153,39 @@ winget install --interactive --exact dorssel.usbipd-win
 
 Windowsの **PowerShellを管理者権限で起動** し、USBデバイスをWSL2へパススルーします。
 
-```powershell
+
 # 1. 接続されているUSBデバイスのリストを確認
+```powershell
 usbipd list
+```
+
 
 # 2. 対象機器の「BUSID」(例: 2-1) を指定して共有状態にする（初回のみ）
+```powershell
 usbipd bind --busid <BUSID>
+```
+
 
 # 3. デバイスをWSL2へアタッチ
+```powershell
 usbipd attach --wsl --busid <BUSID>
+```
 
 #### ② 【WSL2側】 デバイスへのアクセス権限を付与
 
 WSL2 (Ubuntu) のターミナルで、デバイスが認識されているか確認し、権限を付与します。
 
-```powershell
+
 # 1. デバイス認識確認
+```powershell
 ls /dev/ttyUSB*
 # または
 ls /dev/ttyACM*
 
+```powershell
 # 2. 権限付与（例: ttyUSB0の場合）
 sudo chmod 666 /dev/ttyUSB0
+```
 
 
 #### ③ 【コンテナ側】 実機対応コンテナの起動
@@ -183,3 +195,4 @@ Step 3で生成されたディレクトリに移動し、docker-composeでコン
 ```powershell
 cd compose_ver1
 docker compose up -d
+```
