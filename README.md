@@ -153,21 +153,18 @@ winget install --interactive --exact dorssel.usbipd-win
 
 Windowsの **PowerShellを管理者権限で起動** し、USBデバイスをWSL2へパススルーします。
 
-
-# 1. 接続されているUSBデバイスのリストを確認
 ```powershell
+# 1. 接続されているUSBデバイスのリストを確認
 usbipd list
 ```
 
-
-# 2. 対象機器の「BUSID」(例: 2-1) を指定して共有状態にする（初回のみ）
 ```powershell
+# 2. 対象機器の「BUSID」(例: 2-1) を指定して共有状態にする（初回のみ）
 usbipd bind --busid <BUSID>
 ```
 
-
-# 3. デバイスをWSL2へアタッチ
 ```powershell
+# 3. デバイスをWSL2へアタッチ
 usbipd attach --wsl --busid <BUSID>
 ```
 
@@ -175,9 +172,8 @@ usbipd attach --wsl --busid <BUSID>
 
 WSL2 (Ubuntu) のターミナルで、デバイスが認識されているか確認し、権限を付与します。
 
-
-# 1. デバイス認識確認
 ```powershell
+# 1. デバイス認識確認
 ls /dev/ttyUSB*
 # または
 ls /dev/ttyACM*
@@ -187,12 +183,11 @@ ls /dev/ttyACM*
 sudo chmod 666 /dev/ttyUSB0
 ```
 
-
+```powershell
 #### ③ 【コンテナ側】 実機対応コンテナの起動
 
 Step 3で生成されたディレクトリに移動し、docker-composeでコンテナを起動します。
 
-```powershell
 cd compose_ver1
 docker compose up -d
 ```
