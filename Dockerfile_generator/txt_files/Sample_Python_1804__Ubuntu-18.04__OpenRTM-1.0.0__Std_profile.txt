@@ -1,0 +1,25 @@
+MIDDLEWARE_NAME: OpenRTM
+OS_NAME: Ubuntu
+OS_VERSION: 18.04
+COMPILER_NAME: Python
+
+APT_PACKAGES:
+- build-essential
+- cmake
+- doxygen
+- git
+- libboost-all-dev
+- omniidl
+- omniorb-nameserver
+- openrtm-aist
+- python3-dev
+- python3-omniorb
+- python3-pip
+
+PIP_PACKAGES:
+- numpy
+
+GIT_REPOSITORIES:
+- gitURL1
+  url: https://github.com/elephantrobotics/pymycobot.git
+  branch: main

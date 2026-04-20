@@ -1,0 +1,34 @@
+ROS_IMAGE: ros:humble-ros-base
+ROS_DISTRO: humble
+COMPILER_NAME: Python
+
+APT_PACKAGES:
+- build-essential
+- cmake
+- git
+- libboost-all-dev
+- libgl1-mesa-dri
+- libgl1-mesa-glx
+- mesa-utils
+- python3-colcon-common-extensions
+- python3-pip
+- python3-rosdep
+- python3-setuptools
+- ros-humble-ament-cmake
+- ros-humble-gazebo-ros-pkgs
+- ros-humble-rclpy
+- ros-humble-rviz2
+- ros-humble-tf2
+- ros-humble-turtlebot3-bringup
+- ros-humble-turtlebot3-description
+- ros-humble-turtlebot3-msgs
+- ros-humble-turtlebot3-teleop
+- ros-humble-xacro
+- x11-apps
+
+PIP_PACKAGES:
+
+GIT_REPOSITORIES:
+- gitURL1
+  url: https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+  branch: humble

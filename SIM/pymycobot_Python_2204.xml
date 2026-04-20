@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>pymycobot_2204</ModuleName>
+    <Description>pymycobot container for Ubuntu 22.04 (Python 3.10)</Description>
+  </GenInfo>
+
+  <Properties>
+    <osType type="Ubuntu" bit="64" version="22.04" />
+    <compiler>
+      <compilerName>Python</compilerName>
+      <compilerVersion>3.10</compilerVersion>
+    </compiler>
+  </Properties>
+
+  <Infrastructure>
+    <middleware>
+      <InfraType>
+        <name>OpenRTM</name>
+        <version min="1.2.0" max="1.2.0" />
+      </InfraType>
+    </middleware>
+  </Infrastructure>
+
+  <ExecutableForm>
+    <exeForm>
+      <exeFileURL>pymycobot_demo.py</exeFileURL>
+      <shellCmd>python3</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>dockerfile_pymycobot_2204__Ubuntu-22.04__OpenRTM-1.2.0__python_Std.Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv><name>dockerfile_Middleware</name><value>OpenRTM</value></nv>
+        <nv><name>dockerfile_MiddlewareVersion</name><value>1.2.0</value></nv>
+        <nv><name>dockerfile_TargetOSVersion</name><value>Ubuntu 22.04 (Jammy)</value></nv>
+        <nv><name>dockerfile_Workspace</name><value>workspace</value></nv>
+        <nv><name>dockerfile_Language</name><value>dockerfile_Python</value></nv>
+        <nv><name>dockerfile_Configuration</name><value>Std</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>OpenRTM-aist</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/elephantrobotics/pymycobot.git main</value></nv>
+      </additionalInfo>
+    </exeForm>
+  </ExecutableForm>
+</Module>

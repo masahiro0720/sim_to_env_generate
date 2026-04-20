@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>MikataArmRTC</ModuleName>
+    <Description>「Mikata Arm」というロボットアームを制御するためのソフトウェアモジュールである</Description>
+    <Manufacturer>
+      <Name>Ogata Labratory</Name>
+    </Manufacturer>
+    <Examples>このRTCは、Mikata Armの制御に使用できます。位置と動作の制御には標準的なJARA_ARMインターフェースを、現在の関節の状態を出力するにはデータポートを提供します。</Examples>
+  </GenInfo>
+
+  <idnType type="Bas">
+    <moduleID>
+      <mID>e0a7b46d-5c8e-5b1b-b4a1-0242ac110002-00123456-00010000-00000000-34080A-00</mID>
+      <iID>00</iID>
+    </moduleID>
+    <informationModelVersion>1.0.0</informationModelVersion>
+  </idnType>
+
+  <Properties>
+    <osType type="Ubuntu" bit="64" version="18.04" />
+    <compiler>
+      <osName>Ubuntu</osName>
+      <verRangeOS min="16.04" max="18.04" />
+      <compilerName>GCC</compilerName>
+      <verRangeCompiler min="7.5.0" max="9.0" />
+      <bitnCPUarch>64, X86_64</bitnCPUarch>
+    </compiler>
+    <exeType>
+      <Item>
+        <opType>PERIODIC</opType>
+        <hardRT>false</hardRT>
+        <timeConstraint>1000</timeConstraint>
+        <priority>0</priority>
+        <instanceType>Singleton</instanceType>
+      </Item>
+    </exeType>
+
+    <organization>
+      <owner>
+        <mID>e0a7b46d-5c8e-5b1b-b4a1-0242ac110002-00123456-00010000-00000000-34080A-00</mID>
+        <iID>00</iID>
+      </owner>
+      <dependency>OWNER</dependency>
+    </organization>
+  </Properties>
+
+  <IOVariables>
+    <Inputs></Inputs>
+    <Outputs>
+      <Output name="JointStates" type="float32" complex="array" unit="None" description="Joint angles of the 6-axis arm and the gripper.">
+        <additionalInfo>
+          <Item name="length" value="7" />
+        </additionalInfo>
+      </Output>
+    </Outputs>
+    <InOuts></InOuts>
+  </IOVariables>
+
+  <Status>
+    <executionStatus>IDLE</executionStatus>
+    <errorType>0</errorType>
+  </Status>
+
+  <Services>
+    <NoOfBasicService>2</NoOfBasicService>
+    <NoOfOptionalService>0</NoOfOptionalService>
+    <ServiceXML>
+      <ID>JARA_ARM_ManipulatorCommonInterface_Common</ID>
+      <pvType>Virtual</pvType>
+      <moType>MANDATORY</moType>
+      <ifURL>ManipulatorCommonInterface_Common.idl</ifURL>
+      <methodList>
+        <Method><methodName>clearAlarms</methodName><argType /><retType>JARA_ARM::RETURN_ID</retType><moType>MANDATORY</moType><reqProvType>PROVIDED</reqProvType></Method>
+      </methodList>
+    </ServiceXML>
+    <ServiceXML>
+      <ID>JARA_ARM_ManipulatorCommonInterface_Middle</ID>
+      <pvType>Virtual</pvType>
+      <moType>MANDATORY</moType>
+      <ifURL>ManipulatorCommonInterface_MiddleLevel.idl</ifURL>
+      <methodList>
+          <Method><methodName>closeGripper</methodName><argType /><retType>JARA_ARM::RETURN_ID</retType><moType>MANDATORY</moType><reqProvType>PROVIDED</reqProvType></Method>
+      </methodList>
+    </ServiceXML>
+  </Services>
+
+  <Infrastructure>
+    <middleware>
+      <InfraType>
+        <name>OpenRTM</name>
+        <version min="1.2.0" max="1.2.0" />
+      </InfraType>
+    </middleware>
+  </Infrastructure>
+
+  <SafeSecure>
+  </SafeSecure>
+
+  <Modelling>
+  </Modelling>
+
+  <ExecutableForm>
+    <exeForm>
+      <exeFileURL>MikataArmComp</exeFileURL>
+      <shellCmd>./MikataArmComp -f MikataArm.conf</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>dockerfile_MikataArmRTC__Ubuntu-18.04__OpenRTM-1.2.0__cpp_Std.Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv><name>dockerfile_Middleware</name><value>OpenRTM</value></nv>
+        <nv><name>dockerfile_MiddlewareVersion</name><value>1.2.0</value></nv>
+        <nv><name>dockerfile_TargetOSVersion</name><value>Ubuntu 18.04 (Bionic)</value></nv>
+        <nv><name>dockerfile_Workspace</name><value>workspace</value></nv>
+        <nv><name>dockerfile_Language</name><value>dockerfile_C++</value></nv>
+        <nv><name>dockerfile_Configuration</name><value>Std</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>OpenRTM-aist</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>omniORB</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>Eigen</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>libdynamixel</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>libmikataarm</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>libaqua</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/ogata-lab-admin/MikataArmRTC.git master</value></nv>
+      </additionalInfo>
+    </exeForm>
+  </ExecutableForm>
+</Module>

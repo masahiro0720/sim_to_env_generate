@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>MikataArm_ROS_open_manipulator</ModuleName>
+    <Description>既存のMikataArmパッケージで見つかったMoveIt!との統合問題を解決したROS対応OpenManipulatorであり、実機環境とシミュレーション環境の両方でシームレスな操作を可能にするオープンロボットプラットフォームです。そして、Arucoマーカー検出モジュールからのIDにより動作する機能を追加したモジュール。</Description>
+    <Manufacturer>
+      <Name>ROBOTIS</Name>
+      <Authors>Darby Lim, Hye-Jong KIM, Ryan Shim, Yong-Ho Na</Authors>
+      <Maintainers>Pyo, Hye-Jong KIM</Maintainers>
+      <CopyrightOwner>Ryusei Tomikawa</CopyrightOwner>
+    </Manufacturer>
+    <Examples>
+      <Item>Simulation: roslaunch open_manipulator_controller open_manipulator_controller.launch use_gazebo:=true use_moveit:=true</Item>
+      <Item>Real Robot: roslaunch open_manipulator_controller open_manipulator_controller.launch use_moveit:=true</Item>
+      <Item>Sample Script: rosrun open_manipulator_moveit open_manipulator.py (performs simple Pick and Place)</Item>
+      <Item>ARMakerID Subscribe: rosrun arm_command_translator command_translator_node.py</Item>
+    </Examples>
+  </GenInfo>
+
+  <idnType type="Com">
+    <moduleID>
+      <mID>00000000000000000000000000000000A0F0F0020001000000000000000000</mID>
+      <iID>00</iID>
+    </moduleID>
+    <informationModelVersion>1.0</informationModelVersion>
+    <swAspects>
+      <moduleID>
+        <mID>... (open_manipulator_controllerのID) ...</mID>
+        <iID>00</iID>
+      </moduleID>
+      <moduleID>
+        <mID>... (open_manipulator_libsのID) ...</mID>
+        <iID>00</iID>
+      </moduleID>
+      <moduleID>
+        <mID>... (open_manipulator_descriptionのID) ...</mID>
+        <iID>00</iID>
+      </moduleID>
+    </swAspects>
+  </idnType>
+
+  <Properties>
+    <osType type="Ubuntu" bit="64" version="20.04" />
+    <compiler>
+      <osName>Ubuntu</osName>
+      <verRangeOS min="16.04" max="20.04" />
+      <compilerName>GCC</compilerName>
+      <verRangeCompiler min="9.0" max="Higher" />
+      <bitnCPUarch>64, X86</bitnCPUarch>
+    </compiler>
+    <exeType>
+      <Item>
+        <opType>PERIODIC</opType>
+        <priority>31</priority>
+        <hardRT>true</hardRT>
+        <timeConstraint>10000</timeConstraint>
+        <instanceType>Singleton</instanceType>
+      </Item>
+    </exeType>
+
+    <organization>
+      <owner>
+        <mID>...</mID>
+        <iID>...</iID>
+      </owner>
+      <dependency>OWNER</dependency>
+    </organization>
+  </Properties>
+
+  <IOVariables>
+    <Inputs>
+      <Input name="option" type="class" complexName="std_msgs/String" description="オプションの指示（例：設定表示コマンド）" />
+    </Inputs>
+    <Outputs>
+      <Output name="kinematics_pose" type="class" complexName="open_manipulator_msgs/KinematicsPose" description="エンドエフェクタの現在の運動学的姿勢" />
+      <Output name="states" type="class" complexName="open_manipulator_msgs/OpenManipulatorState" description="ロボット全体の状態（動作中か、アクチュエータが有効かなど）" />
+      <Output name="joint_states" type="class" complexName="sensor_msgs/JointState" description="各関節の現在の状態（位置、速度、トルク）" />
+    </Outputs>
+    <InOuts>
+      <InOut name="SetJointPosition.srv" type="class" complexName="open_manipulator_msgs/SetJointPosition">
+        <Input name="planning_group" type="string" description="プランニンググループ名" />
+        <Input name="joint_position" type="class" complexName="open_manipulator_msgs/JointPosition" description="関節空間での目標位置" />
+        <Input name="path_time" type="float64" unit="sec" description="経路時間" />
+        <Output name="is_planned" type="bool" description="計画の成否" />
+      </InOut>
+      </InOuts>
+  </IOVariables>
+
+  <Status>
+    <executionStatus>IDLE</executionStatus>
+    <errorType>0</errorType>
+  </Status>
+
+  <Services>
+     </Services>
+
+  <Infrastructure>
+    <middleware>
+      <InfraType>
+        <name>ROS 1</name>
+        <version min="kinetic" max="noetic" />
+      </InfraType>
+    </middleware>
+    </Infrastructure>
+
+  <SafeSecure>
+     </SafeSecure>
+
+  <Modelling>
+    <simulationModel>
+      <simulator>Gazebo</simulator>
+      <mdf type="URDF">
+        <Item>open_manipulator_description/urdf/open_manipulator.urdf.xacro</Item>
+        <Item>open_manipulator_description/urdf/open_manipulator.gazebo.xacro</Item>
+        <Item>open_manipulator_description/urdf/materials.xacro</Item>
+      </mdf>
+      <mdf type="STL">
+        <Item>open_manipulator_description/meshes/chain_link1.stl</Item>
+        </mdf>
+      <dynamicSW>
+        <exeFileURL>devel/lib/open_manipulator_controller/open_manipulator_controller</exeFileURL>
+        <shellCmd>roslaunch open_manipulator_controller open_manipulator_controller.launch use_gazebo:=true use_moveit:=true</shellCmd>
+        <properties>
+          <Property name="controlPeriod" type="float64" immutable="false" unit="sec" value="0.001" />
+        </properties>
+      </dynamicSW>
+    </simulationModel>
+  </Modelling>
+
+  <ExecutableForm>
+    <exeForm>
+      <exeFileURL>devel/lib/open_manipulator_controller/open_manipulator_controller</exeFileURL>
+      <shellCmd>roslaunch open_manipulator_controller open_manipulator_controller.launch use_gazebo:=true use_moveit:=true</shellCmd>
+    </exeForm>
+    <exeForm>
+      <exeFileURL>devel/lib/open_manipulator_controller/open_manipulator_controller</exeFileURL>
+      <shellCmd>roslaunch open_manipulator_controller open_manipulator_controller.launch use_moveit:=true</shellCmd>
+      <additionalInfo>
+        <nv>
+          <name>pre_execution_command</name>
+          <value>sudo chmod 666 /dev/ttyUSB0</value>
+        </nv>
+      </additionalInfo>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>dockerfile_MikataArm_ROS_open_manipulator__Ubuntu-20.04__ROS1-noetic__cpp_Full.Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv><name>dockerfile_Middleware</name><value>ROS 1</value></nv>
+        <nv><name>dockerfile_MiddlewareVersion</name><value>Noetic</value></nv>
+        <nv><name>dockerfile_TargetOSVersion</name><value>Ubuntu 20.04 (Focal)</value></nv>
+        <nv><name>dockerfile_Workspace</name><value>catkin_ws</value></nv>
+        <nv><name>dockerfile_Language</name><value>dockerfile_C++</value></nv>
+        <nv><name>dockerfile_Configuration</name><value>Full</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>actionlib</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>moveit_core</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>moveit_ros_planning</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>moveit_ros_planning_interface</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>robotis_manipulator</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>dynamixel_workbench_toolbox</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>cmake_modules</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>qtbase5-dev</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>qt5-qmake</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>libqt5-core</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>libqt5-gui</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>urdf</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>xacro</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>catkin</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>moveit</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>joint_state_publisher_gui</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>rviz</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>robot_state_publisher</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>gazebo_ros_pkgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>gazebo_ros_control</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>rospy</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>std_msgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>open_manipulator_msgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>boost</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>eigen</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/ROBOTIS-GIT/DynamixelSDK.git required</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/ROBOTIS-GIT/dynamixel-workbench.git required</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git required</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/rsdlab/MikataArm.git main</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/ROBOTIS-GIT/robotis_manipulator.git main</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/masahiro0720/arm_command_translator.git main</value></nv>
+      </additionalInfo>
+    </exeForm>
+  </ExecutableForm>
+</Module>

@@ -1,0 +1,7 @@
+streamlit
+pandas
+numpy
+altair
+GitPython
+pyyaml
+watchdog

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>image_pipeline_ros2</ModuleName>
+    <Description>ROS 2 image_pipeline package. Includes camera_calibration (Python) and image_proc (C++).</Description>
+    <Manufacturer>
+      <Name>Open Robotics</Name>
+    </Manufacturer>
+  </GenInfo>
+
+  <idnType type="Com">
+    <moduleID>
+      <mID>IMAGE_PIPELINE_ROS2_PYTHON_TEST_001</mID>
+      <iID>00</iID>
+    </moduleID>
+    <informationModelVersion>1.0</informationModelVersion>
+  </idnType>
+
+  <Properties>
+    <osType type="Ubuntu" bit="64" version="22.04" />
+    <compiler>
+      <osName>Ubuntu</osName>
+      <verRangeOS min="22.04" max="22.04" />
+      <compilerName>Python</compilerName>
+      <bitnCPUarch>64, x86_64</bitnCPUarch>
+    </compiler>
+
+    <organization>
+      <owner>
+        <mID>...</mID>
+        <iID>...</iID>
+      </owner>
+    </organization>
+  </Properties>
+
+  <Infrastructure>
+    <middleware>
+      <InfraType>
+        <name>ROS 2</name>
+        <version min="humble" max="humble" />
+      </InfraType>
+    </middleware>
+  </Infrastructure>
+
+  <ExecutableForm>
+    <exeForm>
+      <exeFileURL>camera_calibration/nodes/cameracalibrator.py</exeFileURL>
+      <shellCmd>ros2 run camera_calibration cameracalibrator --help</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>dockerfile_image_pipeline_ros2__Ubuntu-22.04__ROS2-humble__python_Min.Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv><name>dockerfile_Middleware</name><value>ROS 2</value></nv>
+        <nv><name>dockerfile_MiddlewareVersion</name><value>Humble</value></nv>
+        <nv><name>dockerfile_TargetOSVersion</name><value>Ubuntu 22.04 (Jammy)</value></nv>
+        <nv><name>dockerfile_Workspace</name><value>colcon_ws</value></nv>
+        <nv><name>dockerfile_Language</name><value>dockerfile_Python</value></nv>
+        <nv><name>dockerfile_Configuration</name><value>Min</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>cv_bridge</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>image_geometry</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>rclpy</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>std_msgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>sensor_msgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>ament_cmake</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>image_transport</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>camera_info_manager</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>camera_calibration_parsers</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>eigen_conversions</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>tf2</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>tf2_ros</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>tf2_geometry_msgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>opencv2</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>imutils</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/ros-perception/image_pipeline.git humble</value></nv>
+      </additionalInfo>
+    </exeForm>
+  </ExecutableForm>
+</Module>

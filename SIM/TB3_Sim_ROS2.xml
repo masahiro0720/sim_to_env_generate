@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>turtlebot3_sim_ros2</ModuleName>
+    <Description>TurtleBot3 Simulations for ROS 2</Description>
+    <Manufacturer>
+      <Name>ROBOTIS</Name>
+    </Manufacturer>
+  </GenInfo>
+
+  <idnType type="Com">
+    <moduleID>TB3_SIM_ROS2_001</moduleID>
+    <iID>00</iID>
+  </idnType>
+
+  <Properties>
+    <osType type="Ubuntu" bit="64" version="22.04" />
+    <compiler>
+      <osName>Ubuntu</osName>
+      <verRangeOS min="22.04" max="22.04" />
+      <compilerName>Python</compilerName>
+    </compiler>
+
+    <organization>
+      <owner><mID>...</mID><iID>...</iID></owner>
+    </organization>
+  </Properties>
+
+  <Infrastructure>
+    <middleware>
+      <InfraType>
+        <name>ROS 2</name>
+        <version min="humble" max="humble" />
+      </InfraType>
+    </middleware>
+  </Infrastructure>
+
+  <ExecutableForm>
+    <exeForm>
+      <exeFileURL>launch/turtlebot3_fake.launch.py</exeFileURL>
+      <shellCmd>export TURTLEBOT3_MODEL=burger &amp;&amp; ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>dockerfile_turtlebot3_sim_ros2__Ubuntu-22.04__ROS2-humble__python_Min.Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv><name>dockerfile_Middleware</name><value>ROS 2</value></nv>
+        <nv><name>dockerfile_MiddlewareVersion</name><value>Humble</value></nv>
+        <nv><name>dockerfile_TargetOSVersion</name><value>Ubuntu 22.04 (Jammy)</value></nv>
+        <nv><name>dockerfile_Workspace</name><value>colcon_ws</value></nv>
+        <nv><name>dockerfile_Language</name><value>dockerfile_Python</value></nv>
+        <nv><name>dockerfile_Configuration</name><value>Min</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>rclpy</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>gazebo_ros_pkgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>xacro</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>tf2</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>ament_cmake</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>turtlebot3_description</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>turtlebot3_msgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>turtlebot3_teleop</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>turtlebot3_bringup</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>rviz</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git humble</value></nv>
+      </additionalInfo>
+    </exeForm>
+  </ExecutableForm>
+</Module>

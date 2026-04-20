@@ -1,0 +1,32 @@
+MIDDLEWARE_NAME: OpenRTM
+OS_NAME: Ubuntu
+OS_VERSION: 18.04
+COMPILER_NAME: C++
+WORKSPACE_NAME: workspace
+DESCRIPTION: 「Mikata Arm」というロボットアームを制御するためのソフトウェアモジュールである
+AUTHORS: Ogata Labratory
+
+APT_PACKAGES:
+- build-essential
+- cmake
+- doxygen
+- git
+- libboost-all-dev
+- libeigen3-dev
+- libomniorb4-dev
+- omniidl
+- omniorb-nameserver
+- openrtm-aist
+- openrtm-aist-dev
+- pkg-config
+- python3-dev
+- python3-omniorb
+- python3-pip
+- uuid-dev
+
+PIP_PACKAGES:
+
+GIT_REPOSITORIES:
+- gitURL1
+  url: https://github.com/ogata-lab-admin/MikataArmRTC.git
+  branch: master

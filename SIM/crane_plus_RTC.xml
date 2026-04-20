@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>CraneplusRTC</ModuleName>
+    <Description>CraneplusRTC</Description>
+    <Manufacturer>
+      <Name>rsdlab</Name>
+      <Authors>rsdlab</Authors>
+      <Maintainers>unknown</Maintainers>
+      <CopyrightOwner>National Institute of Advanced Industrial Science and Technology</CopyrightOwner>
+    </Manufacturer>
+    <Examples>このモジュールは、OpenRTM-aistをベースとしたロボットアーム「CRANE+ V2」の制御用コンポーネントです。JARA-ARM共通インターフェースを通じて、ロボットの動作を制御します。</Examples>
+  </GenInfo>
+
+  <idnType type="Bas">
+    <moduleID>
+      <mID>e6b189a06c9c486093c6e9185a060d4dc3c3c30100000000000000100011000101</mID>
+      <iID>00</iID>
+    </moduleID>
+    <informationModelVersion>1.0</informationModelVersion>
+  </idnType>
+
+  <Properties>
+    <osType type="Linux" bit="64" version="Ubuntu 18.04" />
+    <compiler>
+      <osName>Ubuntu</osName>
+      <verRangeOS min="18.04" max="20.04" />
+      <compilerName>GCC</compilerName>
+      <verRangeCompiler min="5.4.0" max="Higher" />
+      <bitnCPUarch>32/64, x86/ARM</bitnCPUarch>
+    </compiler>
+    <exeType>
+      <Item>
+        <opType>PERIODIC</opType>
+        <hardRT>false</hardRT>
+        <timeConstraint>1000</timeConstraint>
+        <priority>0</priority>
+        <instanceType>Singleton</instanceType>
+      </Item>
+    </exeType>
+
+    <organization>
+      <owner>
+        <mID>e6b189a06c9c486093c6e9185a060d4dc3c3c30100000000000000100011000101</mID>
+        <iID>00</iID>
+      </owner>
+      <dependency>OWNER</dependency>
+    </organization>
+  </Properties>
+
+  <IOVariables>
+  </IOVariables>
+
+  <Status>
+    <executionStatus>IDLE</executionStatus>
+    <errorType>0</errorType>
+  </Status>
+
+  <Services>
+  </Services>
+
+  <Infrastructure>
+    <middleware>
+      <InfraType>
+        <name>OpenRTM</name>
+        <version min="1.2.0" max="1.2.0" />
+      </InfraType>
+    </middleware>
+  </Infrastructure>
+
+  <SafeSecure>
+  </SafeSecure>
+
+  <Modelling>
+  </Modelling>
+
+  <ExecutableForm>
+    <exeForm>
+      <exeFileURL>devel/lib/CraneplusRTC/CraneplusRTCComp</exeFileURL>
+      <shellCmd>./CraneplusRTCComp</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>dockerfile_CraneplusRTC__Ubuntu-18.04__OpenRTM-1.2.0__cpp_Std.Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv><name>dockerfile_Middleware</name><value>OpenRTM</value></nv>
+        <nv><name>dockerfile_MiddlewareVersion</name><value>1.2.0</value></nv>
+        <nv><name>dockerfile_TargetOSVersion</name><value>Ubuntu 18.04 (Bionic)</value></nv>
+        <nv><name>dockerfile_Workspace</name><value>workspace</value></nv>
+        <nv><name>dockerfile_Language</name><value>dockerfile_C++</value></nv>
+        <nv><name>dockerfile_Configuration</name><value>Std</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>OpenRTM-aist</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>omniORB</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>DynamixelSDK</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>boost</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>OpenCV</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/masahiro0720/CRANEplusRTC_ver2.git main</value></nv>
+      </additionalInfo>
+    </exeForm>
+  </ExecutableForm>
+</Module>

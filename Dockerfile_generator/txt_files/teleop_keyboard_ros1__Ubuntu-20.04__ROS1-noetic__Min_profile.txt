@@ -1,0 +1,24 @@
+ROS_IMAGE: ros:noetic-ros-base
+ROS_DISTRO: noetic
+COMPILER_NAME: Python
+
+APT_PACKAGES:
+- build-essential
+- cmake
+- git
+- libboost-all-dev
+- python3-catkin-tools
+- python3-pip
+- python3-rosdep
+- python3-rosinstall
+- python3-rosinstall-generator
+- python3-wstool
+- ros-noetic-geometry-msgs
+- ros-noetic-rospy
+
+PIP_PACKAGES:
+
+GIT_REPOSITORIES:
+- gitURL1
+  url: https://github.com/ros-teleop/teleop_twist_keyboard.git
+  branch: master

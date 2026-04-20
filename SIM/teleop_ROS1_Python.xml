@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>teleop_keyboard_ros1</ModuleName>
+    <Description>Generic Keyboard Teleop for ROS 1</Description>
+    <Manufacturer>
+      <Name>Austin Hendrix</Name>
+    </Manufacturer>
+  </GenInfo>
+
+  <idnType type="Com">
+    <moduleID>TELEOP_ROS1_001</moduleID>
+    <iID>00</iID>
+  </idnType>
+
+  <Properties>
+    <osType type="Ubuntu" bit="64" version="20.04" />
+    <compiler>
+      <osName>Ubuntu</osName>
+      <verRangeOS min="20.04" max="20.04" />
+      <compilerName>Python</compilerName>
+    </compiler>
+
+    <organization>
+      <owner><mID>...</mID><iID>...</iID></owner>
+    </organization>
+  </Properties>
+
+  <Infrastructure>
+    <middleware>
+      <InfraType>
+        <name>ROS 1</name>
+        <version min="noetic" max="noetic" />
+      </InfraType>
+    </middleware>
+  </Infrastructure>
+
+  <ExecutableForm>
+    <exeForm>
+      <exeFileURL>teleop_twist_keyboard.py</exeFileURL>
+      <shellCmd>rosrun teleop_twist_keyboard teleop_twist_keyboard.py</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>dockerfile_teleop_keyboard_ros1__Ubuntu-20.04__ROS1-noetic__python_Min.Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv><name>dockerfile_Middleware</name><value>ROS 1</value></nv>
+        <nv><name>dockerfile_MiddlewareVersion</name><value>Noetic</value></nv>
+        <nv><name>dockerfile_TargetOSVersion</name><value>Ubuntu 20.04 (Focal)</value></nv>
+        <nv><name>dockerfile_Workspace</name><value>catkin_ws</value></nv>
+        <nv><name>dockerfile_Language</name><value>dockerfile_Python</value></nv>
+        <nv><name>dockerfile_Configuration</name><value>Min</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>rospy</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>geometry_msgs</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/ros-teleop/teleop_twist_keyboard.git master</value></nv>
+      </additionalInfo>
+    </exeForm>
+  </ExecutableForm>
+</Module>

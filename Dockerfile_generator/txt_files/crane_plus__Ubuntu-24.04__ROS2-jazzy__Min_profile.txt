@@ -1,0 +1,72 @@
+ROS_IMAGE: docker.io/library/ros:jazzy-ros-base
+ROS_DISTRO: jazzy
+COMPILER_NAME: C++
+WORKSPACE_NAME: colcon_ws
+DESCRIPTION: CRANE+ V2ロボット用のROS 2パッケージスイート。制御、記述、シミュレーション、およびMoveIt!設定ファイルが含まれています。
+AUTHORS: Shota Aoki, Atsushi Kuwagata, Yusuke Kato
+
+APT_PACKAGES:
+- build-essential
+- cmake
+- git
+- libboost-all-dev
+- libgl1-mesa-dri
+- libgl1-mesa-glx
+- libopencv-dev
+- libudev-dev
+- mesa-utils
+- python3-colcon-common-extensions
+- python3-pip
+- python3-rosdep
+- rclcpp
+- ros-jazzy-controller-manager
+- ros-jazzy-cv-bridge
+- ros-jazzy-dynamixel-sdk
+- ros-jazzy-gazebo-ros-pkgs
+- ros-jazzy-gazebo-ros2-control
+- ros-jazzy-geometry-msgs
+- ros-jazzy-gripper-controllers
+- ros-jazzy-gz-ros2-control
+- ros-jazzy-hardware-interface
+- ros-jazzy-ign-ros2-control
+- ros-jazzy-image-geometry
+- ros-jazzy-joint-state-publisher
+- ros-jazzy-joint-state-publisher-gui
+- ros-jazzy-moveit-configs-utils
+- ros-jazzy-moveit-core
+- ros-jazzy-moveit-kinematics
+- ros-jazzy-moveit-planners
+- ros-jazzy-moveit-ros-move-group
+- ros-jazzy-moveit-ros-planning-interface
+- ros-jazzy-moveit-ros-visualization
+- ros-jazzy-moveit-ros-warehouse
+- ros-jazzy-moveit-setup-assistant
+- ros-jazzy-moveit-simple-controller-manager
+- ros-jazzy-pluginlib
+- ros-jazzy-robot-state-publisher
+- ros-jazzy-ros-gz
+- ros-jazzy-ros-gz-bridge
+- ros-jazzy-ros-gz-sim
+- ros-jazzy-ros2-control
+- ros-jazzy-ros2-controllers
+- ros-jazzy-ros2controlcli
+- ros-jazzy-rviz-common
+- ros-jazzy-rviz-default-plugins
+- ros-jazzy-rviz2
+- ros-jazzy-tf2
+- ros-jazzy-tf2-geometry-msgs
+- ros-jazzy-tf2-ros
+- ros-jazzy-usb-cam
+- ros-jazzy-vision-opencv
+- ros-jazzy-xacro
+- x11-apps
+
+PIP_PACKAGES:
+
+GIT_REPOSITORIES:
+- gitURL1
+  url: https://github.com/rt-net/crane_plus.git
+  branch: jazzy
+- gitURL2
+  url: https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+  branch: main

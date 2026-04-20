@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module type="SIM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ISO_22166_202_ModuleProfile.xsd">
+  <GenInfo>
+    <ModuleName>crane_plus_aruco</ModuleName>
+    <Description>CRANE+ V2ロボット用のROS 2パッケージスイート。制御、記述、シミュレーション、およびMoveIt!設定ファイルが含まれています。かつARマーカーのトピックを受信可能です。</Description>
+    <Manufacturer>
+      <Name>RT Corporation</Name>
+      <Authors>Shota Aoki, Atsushi Kuwagata, Yusuke Kato, Masahiro Saito</Authors>
+      <Maintainers>RT Corporation</Maintainers>
+      <CopyrightOwner>RT Corporation</CopyrightOwner>
+    </Manufacturer>
+    <Examples>
+      <Item>Simulation: ros2 launch crane_plus_examples demo.launch.py</Item>
+      <Item>Real Robot: ros2 launch crane_plus_examples demo.launch.py port_name:=/dev/ttyUSB0</Item>
+      <Item>Sample Script: ros2 launch crane_plus_examples example.launch.py example:='gripper_control' (performs gripper control)</Item>
+      <Item>ARMarker system bringup: ros2 launch crane_plus_examples keyboard_control.launch.py</Item>
+    </Examples>
+  </GenInfo>
+
+  <idnType type="Com">
+    <moduleID>
+      <mID>87a7d4a671d24e44b81b8f3b20e06e30XXXXXX03000000000000001001000000</mID>
+      <iID>00</iID>
+    </moduleID>
+    <informationModelVersion>1.0</informationModelVersion>
+    <swAspects>
+      </swAspects>
+  </idnType>
+
+  <Properties>
+    <osType type="Linux" bit="64" version="Ubuntu 24.04" />
+    <compiler>
+      <osName>Ubuntu</osName>
+      <verRangeOS min="24.04" max="24.04" />
+      <compilerName>GCC</compilerName>
+      <verRangeCompiler min="9.0" max="Higher" />
+      <bitnCPUarch>64, x86_64</bitnCPUarch>
+    </compiler>
+    <exeType>
+      <Item>
+        <opType>PERIODIC</opType>
+        <hardRT>false</hardRT>
+        <timeConstraint>10000</timeConstraint>
+        <priority>0</priority>
+        <instanceType>MultitonStatic</instanceType>
+      </Item>
+      <Item>
+        <opType>EVENTDRIVEN</opType>
+        <hardRT>false</hardRT>
+        <timeConstraint>0</timeConstraint>
+        <priority>0</priority>
+        <instanceType>MultitonComm</instanceType>
+      </Item>
+    </exeType>
+
+    <organization>
+      <owner>
+        <mID>87a7d4a671d24e44b81b8f3b20e06e30XXXXXX03000000000000001001000000</mID>
+        <iID>00</iID>
+      </owner>
+      <dependency>OWNER</dependency>
+      </organization>
+  </Properties>
+
+  <IOVariables>
+    <Inputs>
+      <Input name="image_raw" type="class" complexName="sensor_msgs/Image" description="カメラからの未処理画像データ" />
+      <Input name="camera_info" type="class" complexName="sensor_msgs/CameraInfo" description="カメラのキャリブレーション情報" />
+      <Input name="tf" type="class" complexName="tf2_msgs/TFMessage" description="座標変換データ" />
+    </Inputs>
+    <Outputs>
+      <Output name="tf" type="class" complexName="tf2_msgs/TFMessage" description="検出された対象物の座標変換データ" />
+      <Output name="image_thresholded" type="class" complexName="sensor_msgs/Image" description="色の閾値処理が施された画像データ" />
+      <Output name="joint_states" type="class" complexName="sensor_msgs/JointState" description="各関節の現在の状態（位置、速度、トルク、温度、電圧など）" />
+    </Outputs>
+    <InOuts>
+      <InOut name="GoalPose" type="class" complexName="geometry_msgs/Pose" description="アームの目標ポーズ（位置と姿勢）" />
+      <InOut name="JointState" type="class" complexName="sensor_msgs/JointState" description="アームの目標関節値" />
+      <InOut name="FollowJointTrajectory" type="class" complexName="trajectory_msgs/JointTrajectory" description="アームの軌道実行アクション" />
+      <InOut name="SetJointState" type="class" complexName="sensor_msgs/JointState" description="コントローラへの関節値コマンド" />
+    </InOuts>
+  </IOVariables>
+
+  <Status>
+    <executionStatus>IDLE</executionStatus>
+    <errorType>0</errorType>
+  </Status>
+
+  <Services>
+    <ServiceXML>
+      <ID>controller_spawner_service</ID>
+      <pvType>Virtual</pvType>
+      <moType>MANDATORY</moType>
+      <methodList>
+        <Method>
+          <methodName>spawner</methodName>
+          <argType>
+            <ArgSpec type="string" valueName="controller_name" inout="IN" />
+          </argType>
+          <retType>bool</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>PROVIDED</reqProvType>
+        </Method>
+      </methodList>
+    </ServiceXML>
+    <ServiceXML>
+      <ID>move_group_interface</ID>
+      <pvType>Virtual</pvType>
+      <moType>MANDATORY</moType>
+      <methodList>
+        <Method>
+          <methodName>set_pose_target</methodName>
+          <argType>
+            <ArgSpec type="geometry_msgs/Pose" valueName="target_pose" inout="IN" />
+          </argType>
+          <retType>bool</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>REQUIRED</reqProvType>
+        </Method>
+        <Method>
+          <methodName>move</methodName>
+          <argType />
+          <retType>bool</retType>
+          <moType>MANDATORY</moType>
+          <reqProvType>REQUIRED</reqProvType>
+        </Method>
+      </methodList>
+    </ServiceXML>
+  </Services>
+
+  <Infrastructure>
+    <middleware>
+      <InfraType>
+        <name>ROS 2</name>
+        <version min="foxy" max="jazzy" />
+      </InfraType>
+    </middleware>
+    </Infrastructure>
+
+  <SafeSecure>
+    </SafeSecure>
+
+  <Modelling>
+    </Modelling>
+
+  <ExecutableForm>
+    <exeForm>
+      <exeFileURL>devel/lib/crane_plus_control/crane_plus_hardware</exeFileURL>
+      <shellCmd>ros2 launch crane_plus_control crane_plus_control.launch.py port_name:=/dev/ttyUSB0</shellCmd>
+      <additionalInfo>
+        <nv>
+          <name>pre_execution_command</name>
+          <value>sudo chmod 666 /dev/ttyUSB0</value>
+        </nv>
+      </additionalInfo>
+    </exeForm>
+    <exeForm>
+      <exeFileURL>devel/lib/crane_plus_examples/pick_and_place</exeFileURL>
+      <shellCmd>ros2 launch crane_plus_examples example.launch.py example:='pick_and_place'</shellCmd>
+    </exeForm>
+    <exeForm>
+      <exeFileURL>devel/lib/crane_plus_control/crane_plus_hardware</exeFileURL>
+      <shellCmd>ros2 launch crane_plus_examples demo.launch.py use_gazebo:=true</shellCmd>
+    </exeForm>
+
+    <exeForm>
+      <exeFileURL>dockerfile_crane_plus_aruco__Ubuntu-24.04__ROS2-jazzy__cpp_Full.Dockerfile</exeFileURL>
+      <additionalInfo>
+        <nv><name>dockerfile_Middleware</name><value>ROS 2</value></nv>
+        <nv><name>dockerfile_MiddlewareVersion</name><value>Jazzy</value></nv>
+        <nv><name>dockerfile_TargetOSVersion</name><value>Ubuntu 24.04 (Noble)</value></nv>
+        <nv><name>dockerfile_Workspace</name><value>colcon_ws</value></nv>
+        <nv><name>dockerfile_Language</name><value>dockerfile_C++</value></nv>
+        <nv><name>dockerfile_Configuration</name><value>Full</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>rclcpp</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>pluginlib</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>controller_manager</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>hardware_interface</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>ros2_control</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>ros2_controllers</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>ros2controlcli</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>gazebo_ros2_control</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>dynamixel_sdk</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>ros_gz_bridge</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>ros_gz_sim</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>gazebo_ros_pkgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>moveit</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>moveit_core</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>moveit_ros_planning_interface</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>moveit_configs_utils</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>tf2</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>tf2_ros</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>tf2_geometry_msgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>geometry_msgs</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>joint_state_publisher</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>robot_state_publisher</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>xacro</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>rviz</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>opencv2</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>cv_bridge</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>image_geometry</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>usb_cam</value></nv>
+        <nv><name>dockerfile_Libraries</name><value>vision_opencv</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/masahiro0720/crane_plus_aruco.git main</value></nv>
+        <nv><name>dockerfile_GitURL</name><value>https://github.com/ROBOTIS-GIT/DynamixelSDK.git required</value></nv>
+      </additionalInfo>
+    </exeForm>
+  </ExecutableForm>
+
+</Module>

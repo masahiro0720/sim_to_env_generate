@@ -1,0 +1,39 @@
+ROS_IMAGE: ros:humble-ros-base
+ROS_DISTRO: humble
+COMPILER_NAME: Python
+
+APT_PACKAGES:
+- build-essential
+- cmake
+- git
+- libboost-all-dev
+- libgl1-mesa-dri
+- libgl1-mesa-glx
+- libopencv-dev
+- mesa-utils
+- python3-colcon-common-extensions
+- python3-pip
+- python3-rosdep
+- python3-setuptools
+- ros-humble-ament-cmake
+- ros-humble-camera-calibration-parsers
+- ros-humble-camera-info-manager
+- ros-humble-cv-bridge
+- ros-humble-image-geometry
+- ros-humble-image-transport
+- ros-humble-rclpy
+- ros-humble-sensor-msgs
+- ros-humble-std-msgs
+- ros-humble-tf2
+- ros-humble-tf2-eigen
+- ros-humble-tf2-geometry-msgs
+- ros-humble-tf2-ros
+- x11-apps
+
+PIP_PACKAGES:
+- imutils
+
+GIT_REPOSITORIES:
+- gitURL1
+  url: https://github.com/ros-perception/image_pipeline.git
+  branch: humble

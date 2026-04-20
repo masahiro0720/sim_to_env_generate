@@ -1,0 +1,36 @@
+ROS_IMAGE: ros:noetic-ros-base
+ROS_DISTRO: noetic
+COMPILER_NAME: Python
+
+APT_PACKAGES:
+- build-essential
+- cmake
+- git
+- libboost-all-dev
+- libgl1-mesa-dri
+- libgl1-mesa-glx
+- mesa-utils
+- python3-catkin-tools
+- python3-pip
+- python3-rosdep
+- python3-rosinstall
+- python3-rosinstall-generator
+- python3-wstool
+- ros-noetic-gazebo-plugins
+- ros-noetic-gazebo-ros
+- ros-noetic-rospy
+- ros-noetic-rviz
+- ros-noetic-tf
+- ros-noetic-turtlebot3-bringup
+- ros-noetic-turtlebot3-description
+- ros-noetic-turtlebot3-msgs
+- ros-noetic-turtlebot3-teleop
+- ros-noetic-xacro
+- x11-apps
+
+PIP_PACKAGES:
+
+GIT_REPOSITORIES:
+- gitURL1
+  url: https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+  branch: noetic

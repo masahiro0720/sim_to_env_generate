@@ -1,0 +1,29 @@
+MIDDLEWARE_NAME: OpenRTM
+OS_NAME: Ubuntu
+OS_VERSION: 20.04
+COMPILER_NAME: Python
+WORKSPACE_NAME: workspace
+DESCRIPTION: Test container for pymycobot without OpenRTM source build
+AUTHORS: 
+
+APT_PACKAGES:
+- build-essential
+- cmake
+- doxygen
+- git
+- libboost-all-dev
+- omniidl
+- omniorb-nameserver
+- openrtm-aist
+- openrtm-aist-dev
+- python-is-python3
+- python3-dev
+- python3-omniorb
+- python3-pip
+
+PIP_PACKAGES:
+
+GIT_REPOSITORIES:
+- gitURL1
+  url: https://github.com/elephantrobotics/pymycobot.git
+  branch: main
