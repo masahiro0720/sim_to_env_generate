@@ -184,7 +184,6 @@ ls /dev/ttyACM*
 sudo chmod 666 /dev/ttyUSB0
 ```
 
-```powershell
 #### ③ 【コンテナ側】 実機対応コンテナの起動
 
 Step 3で生成されたディレクトリに移動し、docker-composeでコンテナを起動します。
