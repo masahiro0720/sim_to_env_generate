@@ -177,6 +177,7 @@ WSL2 (Ubuntu) のターミナルで、デバイスが認識されているか確
 ls /dev/ttyUSB*
 # または
 ls /dev/ttyACM*
+```
 
 ```powershell
 # 2. 権限付与（例: ttyUSB0の場合）
@@ -188,6 +189,7 @@ sudo chmod 666 /dev/ttyUSB0
 
 Step 3で生成されたディレクトリに移動し、docker-composeでコンテナを起動します。
 
+```powershell
 cd compose_ver1
 docker compose up -d
 ```
