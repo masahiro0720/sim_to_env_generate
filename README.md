@@ -128,3 +128,20 @@ ISO22166-202規格に準拠したロボットソフトウェア情報モデル�
 | 引数 | 説明 |
 | :--- | :--- |
 | `-f Integral` | 複数のROS 2コンテナを選択した場合、コンテナ間で正常に通信（トピック、サービス）を行うための設定を `docker-compose.yml` に追加します。|
+
+---
+
+## 応用編: Windows PCで実機を動作させる場合 (USBデバイスマウント)
+
+WindowsのWSL2環境でDockerを使用する場合、標準仕様ではホストPCの物理USBポート（ロボットアームやマイコンなど）をコンテナ内から直接認識することができません。
+しかし、本ツールキットとオープンソースツール「`usbipd-win`」を組み合わせることで、Windows環境からでもシームレスに実機デバイスを制御することが可能になります。
+
+> **💡 本ツールキットの強み**
+> 実機制御に必要なコンテナ側の複雑な設定（`docker-compose.yml` への `devices` パススルーや、特権モード `privileged: true` の記述）は、Step 3 の `generate_compose.py` が **自動的に生成済み** です。
+> ユーザーは以下のホスト側（Windows/WSL2）の手順を行うだけで、即座に実機動作環境を構築できます。
+
+### 事前準備: `usbipd-win` のインストール
+Windows側に [usbipd-win](https://github.com/dorssel/usbipd-win) をインストールし、PCを再起動してください。
+（WindowsのコマンドプロンプトまたはPowerShellで以下のコマンドを実行することでインストール可能です）
+```powershell
+winget install --interactive --exact dorssel.usbipd-win
